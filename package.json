@@ -1,0 +1,12 @@
+{
+  "name": "events-organiser",
+  "version": "1.0.0",
+  "description": "todo",
+  "main": "index.js",
+  "repository": "https://github.com/surbhi-mahajan/events-organiser.git",
+  "dependencies": {
+    "@vue/cli": "^3.0.0-rc.3"
+  },
+  "author": "surbhi mahajan <surbhi.mahajan@wingify.com>",
+  "license": "MIT"
+}
