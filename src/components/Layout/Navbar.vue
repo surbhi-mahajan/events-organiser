@@ -22,30 +22,30 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
 @Component({
-  name: 'Navbar'
+  name: 'Navbar',
 })
 export default class Navbar extends Vue {
   @Prop({ type: Boolean, default: false })
-  value: boolean
+  public value: boolean;
 
   @Watch('$route.name')
-  forceUpdate() {
-    this.$forceUpdate()
+  public forceUpdate() {
+    this.$forceUpdate();
   }
 
   get activeClass(): string {
-    return 'theme--light'
+    return 'theme--light';
   }
 
-  onToggle(): void {
-    this.$emit('input', this.value)
+  public onToggle(): void {
+    this.$emit('input', this.value);
   }
 
-  isActiveRoute(route: string): boolean {
-    return (this.$router.currentRoute.name || '').indexOf(route) !== -1
+  public isActiveRoute(route: string): boolean {
+    return (this.$router.currentRoute.name || '').indexOf(route) !== -1;
   }
 }
 </script>

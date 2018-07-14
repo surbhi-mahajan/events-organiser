@@ -5,14 +5,14 @@
     </v-toolbar>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component({
-  name: 'Header'
+  name: 'Header',
 })
 export default class Header extends Vue {
-  onDrawerClick(): void {
-    this.$emit('toggleDrawer')
+  public onDrawerClick(): void {
+    this.$emit('toggleDrawer');
   }
 }
 </script>

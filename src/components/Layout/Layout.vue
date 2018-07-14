@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <Header @toggleDrawer="isDrawerOpen = !isDrawerOpen"/>
     <Navbar v-model="isDrawerOpen" />
     <v-content>
@@ -13,25 +13,25 @@
       </v-container>
     </v-content>
     <Footer />
-  </v-app>
+  </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import Header from './Header.vue'
-import Footer from './Footer.vue'
-import Navbar from './Navbar.vue'
+import { Component, Vue } from 'vue-property-decorator';
+import Header from './Header.vue';
+import Footer from './Footer.vue';
+import Navbar from './Navbar.vue';
 
 @Component({
   components: {
     Header,
     Footer,
-    Navbar
+    Navbar,
   },
-  name: 'Layout'
+  name: 'Layout',
 })
 export default class Layout extends Vue {
-  isDrawerOpen = true
+  public isDrawerOpen = true;
 }
 </script>
 
