@@ -1,5 +1,3 @@
-import '../types/index.d.ts';
-
 import Vue from 'vue';
 
 import { IConfig } from '../interface';
