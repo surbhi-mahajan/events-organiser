@@ -11,10 +11,12 @@ const routerInstance = new Router({
 
 routerInstance.beforeEach((to, from, next) => {
   let redirectTo;
+  const email = sessionStorage.getItem('email');
+
   if (to.name === 'login') {
-    redirectTo = window.email ? '/' : redirectTo;
+    redirectTo = email ? '/' : redirectTo;
   } else {
-    redirectTo = !window.email ? '/login' : redirectTo;
+    redirectTo = !email ? '/login' : redirectTo;
   }
   next(redirectTo);
 });
