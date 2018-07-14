@@ -17,6 +17,22 @@
           <v-list-tile-title>About Us</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
+      <v-list-tile :class="isActiveRoute('create') ? activeClass : 'create'" @click="$router.push({ name: 'create' })">
+        <v-list-tile-action>
+          <v-icon>add</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Create</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile :class="isActiveRoute('events') ? activeClass : 'events'" @click="$router.push({ name: 'events' })">
+        <v-list-tile-action>
+          <v-icon>event</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>My Events</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
     </v-list>
   </v-navigation-drawer>
 </template>
