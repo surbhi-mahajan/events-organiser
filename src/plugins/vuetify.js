@@ -14,7 +14,9 @@ import {
   VTooltip,
   VForm,
   VTextField,
-  VAlert
+  VAlert,
+  VDataTable,
+  VExpansionPanel
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -33,6 +35,8 @@ Vue.use(Vuetify, {
     VTooltip,
     VForm,
     VTextField,
-    VAlert
+    VAlert,
+    VDataTable,
+    VExpansionPanel
   },
 })
