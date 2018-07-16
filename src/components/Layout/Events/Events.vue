@@ -1,5 +1,5 @@
 <template>
-  <v-container pa-0>
+  <v-container class="pa-0">
     <v-layout row wrap>
       <v-flex mb-5 elevation-2>
         <v-tabs v-model="tabs.active" color="grey lighten-4" slider-color="blue">
@@ -11,10 +11,10 @@
               <v-tabs v-model="tab.active" color="grey lighten-4" slider-color="blue">
                 <v-tab v-for="(innerTab, $innerTabIndex) in tab.tabs" :key="$innerTabIndex" @click="$router.push({ name: innerTab.route })">
                   {{ innerTab.name }}
-                  </v-tab>
-                  <v-tab-item v-for="(innerTab, $innerTabIndex) in tab.tabs" :key="$innerTabIndex">
+                </v-tab>
+                <v-tab-item v-for="(innerTab, $innerTabIndex) in tab.tabs" :key="$innerTabIndex">
                   <v-card flat>
-                    <v-card-text>
+                    <v-card-text class="pa-0" id="punit123">
                       <router-view/>
                     </v-card-text>
                   </v-card>

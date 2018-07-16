@@ -100,7 +100,7 @@ export default new Vuex.Store({
     ],
     acceptedActiveEvents: [
       {
-        name: 'Prateek',
+        name: 'Punit',
         venue: 'sdf palace',
         startTime: 1531567476,
         endTime: 1532025000,
@@ -113,7 +113,7 @@ export default new Vuex.Store({
         ],
       },
       {
-        name: 'Manas',
+        name: 'Surbhi',
         venue: 'er palace',
         startTime: 1531564450,
         endTime: 1532025030,
@@ -121,7 +121,7 @@ export default new Vuex.Store({
         id: 312232,
         participants: [
           {
-            name: 'Surbhi Mahajan',
+            name: 'Manas',
           },
           {
             name: 'Punit Gupta',
@@ -131,7 +131,7 @@ export default new Vuex.Store({
     ],
     acceptedExpiredEvents: [
       {
-        name: 'My name 1',
+        name: 'Ankit',
         venue: 'wre palace',
         startTime: 1531567476,
         endTime: 1532025000,
@@ -150,7 +150,7 @@ export default new Vuex.Store({
         ],
       },
       {
-        name: 'My name 2',
+        name: 'Sonam',
         venue: 'eerr palace',
         startTime: 1531564450,
         endTime: 1532025030,

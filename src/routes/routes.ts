@@ -28,6 +28,10 @@ export const routes = [
               name: 'events.created',
               path: 'created',
               redirect: { name: 'events.created.active' },
+              component: {
+                name: 'CreatedEvents',
+                render: (h: any) => h('router-view'),
+              },
               children: [
                 {
                   name: 'events.created.active',
@@ -45,6 +49,10 @@ export const routes = [
               name: 'events.accepted',
               path: 'accepted',
               redirect: { name: 'events.accepted.active' },
+              component: {
+                name: 'AcceptedEvents',
+                render: (h: any) => h('router-view'),
+              },
               children: [
                 {
                   name: 'events.accepted.active',
