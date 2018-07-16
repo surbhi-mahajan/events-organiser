@@ -16,7 +16,8 @@ import {
   VTextField,
   VAlert,
   VDataTable,
-  VExpansionPanel
+  VExpansionPanel,
+  VTabs
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -37,6 +38,7 @@ Vue.use(Vuetify, {
     VTextField,
     VAlert,
     VDataTable,
-    VExpansionPanel
+    VExpansionPanel,
+    VTabs
   },
 })

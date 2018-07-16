@@ -2,13 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import { IEvent } from '../shared/interface/IEvent';
-import { IAcceptedEvent } from '../shared/interface/IAcceptedEvent';
 
 Vue.use(Vuex);
 
 interface IState {
   events: IEvent[];
-  acceptedEvents: IAcceptedEvent[];
+  createdActiveEvents: IEvent[];
+  createdExpiredEvents: IEvent[];
+  acceptedActiveEvents: IEvent[];
+  acceptedExpiredEvents: IEvent[];
 }
 
 export default new Vuex.Store({
@@ -31,7 +33,72 @@ export default new Vuex.Store({
         id: 31232,
       },
     ],
-    acceptedEvents: [
+    createdActiveEvents: [
+      {
+        name: 'Prateek',
+        venue: 'sdf palace',
+        startTime: 1531567476,
+        endTime: 1532025000,
+        event: 'kabaddi',
+        id: 1276456,
+        participants: [
+          {
+            name: 'sdf',
+          },
+          {
+            name: 'qwe',
+          },
+        ],
+      },
+      {
+        name: 'Prateek',
+        venue: 'er palace',
+        startTime: 1531564450,
+        endTime: 1532025030,
+        event: 'snooker',
+        id: 312232,
+        participants: [
+          {
+            name: 'Surbhi Mahajan',
+          },
+          {
+            name: 'Punit Gupta',
+          },
+        ],
+      },
+    ],
+    createdExpiredEvents: [
+      {
+        name: 'Prateek',
+        venue: 'trgrg adf',
+        startTime: 1531567476,
+        endTime: 1532025000,
+        event: 'soccer',
+        id: 1276456,
+        participants: [
+          {
+            name: 'werer',
+          },
+          {
+            name: 'cxvxcv',
+          },
+        ],
+      },
+      {
+        name: 'Prateek',
+        venue: 'er qwe',
+        startTime: 1531564450,
+        endTime: 1532025030,
+        event: 'pool',
+        id: 312232,
+        participants: [
+          {
+            name: 'Ankit',
+          },
+        ],
+      },
+    ],
+    acceptedActiveEvents: [
       {
         name: 'Prateek',
         venue: 'sdf palace',
@@ -62,13 +129,59 @@ export default new Vuex.Store({
         ],
       },
     ],
+    acceptedExpiredEvents: [
+      {
+        name: 'My name 1',
+        venue: 'wre palace',
+        startTime: 1531567476,
+        endTime: 1532025000,
+        event: 'my sport',
+        id: 1276456,
+        participants: [
+          {
+            name: 'abc',
+          },
+          {
+            name: 'pqr',
+          },
+          {
+            name: 'xyz',
+          },
+        ],
+      },
+      {
+        name: 'My name 2',
+        venue: 'eerr palace',
+        startTime: 1531564450,
+        endTime: 1532025030,
+        event: 'TT',
+        id: 312232,
+        participants: [
+          {
+            name: 'qwer',
+          },
+          {
+            name: 'rewq',
+          },
+        ],
+      },
+    ],
   },
   getters: {
     activeEvents(state: IState): IEvent[] {
       return state.events;
     },
-    acceptedEvents(state: IState): IAcceptedEvent[] {
-      return state.acceptedEvents;
+    acceptedActiveEvents(state: IState): IEvent[] {
+      return state.acceptedActiveEvents;
+    },
+    acceptedExpiredEvents(state: IState): IEvent[] {
+      return state.acceptedExpiredEvents;
+    },
+    createdActiveEvents(state: IState): IEvent[] {
+      return state.createdActiveEvents;
+    },
+    createdExpiredEvents(state: IState): IEvent[] {
+      return state.createdExpiredEvents;
     },
   },
   mutations: {

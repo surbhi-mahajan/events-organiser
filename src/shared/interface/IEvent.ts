@@ -1,3 +1,7 @@
+export interface IParticipant {
+  name: string;
+}
+
 export interface IEvent {
   name: string;
   venue: string;
@@ -5,4 +9,5 @@ export interface IEvent {
   endTime: number;
   event: string;
   id: number;
+  participants?: IParticipant[];
 }
