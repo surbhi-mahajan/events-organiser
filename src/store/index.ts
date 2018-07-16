@@ -7,10 +7,15 @@ Vue.use(Vuex);
 
 interface IState {
   events: IEvent[];
+  categories: string[];
 }
 
 export default new Vuex.Store({
   state: {
+    categories: [
+        'football',
+        'cricket',
+    ],
     events: [
       {
         name: 'Surbhi Mahajan',
@@ -31,6 +36,9 @@ export default new Vuex.Store({
     ],
   },
   getters: {
+    categories(state: IState): string[] {
+      return state.categories;
+    },
     activeEvents(state: IState): IEvent[] {
       return state.events;
     },
@@ -53,6 +61,10 @@ export default new Vuex.Store({
         }
       }
     },
+
+    addEvent(state: IState, event: IEvent) {
+        state.events.push(event);
+    },
   },
   actions: {
     acceptEvent({ commit }, id: number) {
@@ -62,5 +74,10 @@ export default new Vuex.Store({
     rejectEvent({ commit }, id: number) {
       commit('rejectEvent', id);
     },
+
+    addEvent({ commit }, event: IEvent) {
+        commit('addEvent', event);
+    },
+
   },
 });

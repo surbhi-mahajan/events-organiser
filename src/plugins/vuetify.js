@@ -14,7 +14,10 @@ import {
   VTooltip,
   VForm,
   VTextField,
-  VAlert
+  VAlert,
+  VTimePicker,
+  VSelect,
+  VMenu
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -33,6 +36,9 @@ Vue.use(Vuetify, {
     VTooltip,
     VForm,
     VTextField,
-    VAlert
+    VAlert,
+    VTimePicker,
+    VSelect,
+    VMenu
   },
 })
