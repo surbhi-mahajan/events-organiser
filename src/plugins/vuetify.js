@@ -17,7 +17,9 @@ import {
   VAlert,
   VTimePicker,
   VSelect,
-  VMenu
+  VMenu,
+  VDataTable,
+  VExpansionPanel
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -39,6 +41,8 @@ Vue.use(Vuetify, {
     VAlert,
     VTimePicker,
     VSelect,
-    VMenu
+    VMenu,
+    VDataTable,
+    VExpansionPanel
   },
 })
