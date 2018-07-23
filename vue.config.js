@@ -1,3 +1,10 @@
+const { APIs } = require('./server')
+
 module.exports = {
-  lintOnSave: false
+  lintOnSave: false,
+  devServer: {
+    before(app) {
+      APIs(app)
+    }
+  }
 }

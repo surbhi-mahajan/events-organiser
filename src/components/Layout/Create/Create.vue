@@ -2,7 +2,7 @@
     <v-container fluid>
         <v-slide-y-transition mode="out-in">
             <v-layout row justify-center align-center>
-                <ActiveEvent v-for="event in activeEvents" :key="event.id" :event="event" />
+                <PendingEvent v-for="event in pendingEvents" :key="event.id" :event="event" />
             </v-layout>
         </v-slide-y-transition>
     </v-container>
@@ -10,16 +10,16 @@
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import ActiveEvent from '../../../shared/components/ActiveEvent/ActiveEvent.vue';
+    import PendingEvent from '@/shared/components/PendingEvent/PendingEvent.vue';
 
     @Component({
-        name: 'Dashboard',
+        name: 'Create',
         components: {
-            ActiveEvent,
+            PendingEvent,
         },
     })
-    export default class Dashboard extends Vue {
-        public activeEvents = this.$store.getters.activeEvents;
+    export default class Create extends Vue {
+        public pendingEvents = this.$store.getters.pendingActiveEvents;
     }
 </script>
 

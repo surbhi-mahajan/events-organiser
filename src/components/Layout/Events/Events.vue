@@ -3,18 +3,18 @@
     <v-layout row wrap>
       <v-flex mb-5 elevation-2>
         <v-tabs v-model="tabs.active" color="grey lighten-4" slider-color="blue">
-          <v-tab v-for="(tab, $index) in tabs" :key="$index" ripple @click="$router.push({ name: tab.route })">
+          <v-tab v-for="tab in tabs" :key="tab.name" ripple @click="$router.push({ name: tab.route })">
               {{ tab.name }}
           </v-tab>
-          <v-tab-item lazy v-for="(tab, $index) in tabs" :key="$index">
+          <v-tab-item lazy v-for="tab in tabs" :key="tab.name">
             <v-card flat>
               <v-tabs v-model="tab.active" color="grey lighten-4" slider-color="blue">
-                <v-tab v-for="(innerTab, $innerTabIndex) in tab.tabs" :key="$innerTabIndex" @click="$router.push({ name: innerTab.route })">
+                <v-tab v-for="innerTab in tab.tabs" :key="innerTab.name" @click="$router.push({ name: innerTab.route })">
                   {{ innerTab.name }}
                 </v-tab>
-                <v-tab-item v-for="(innerTab, $innerTabIndex) in tab.tabs" :key="$innerTabIndex">
+                <v-tab-item v-for="innerTab in tab.tabs" :key="innerTab.name">
                   <v-card flat>
-                    <v-card-text class="pa-0" id="punit123">
+                    <v-card-text class="pa-0">
                       <router-view/>
                     </v-card-text>
                   </v-card>

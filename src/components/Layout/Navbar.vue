@@ -1,7 +1,7 @@
 <template>
   <v-navigation-drawer :value="value" @input="onToggle" fixed app>
     <v-list dense>
-      <v-list-tile :class="isActiveRoute('dashboard') ? activeClass : ''" @click="$router.push({ name: 'dashboard' })">
+      <v-list-tile :class="isActiveRoute(/^dashboard$/) ? activeClass : ''" @click="$router.push({ name: 'dashboard' })">
         <v-list-tile-action>
           <v-icon>home</v-icon>
         </v-list-tile-action>
@@ -9,7 +9,7 @@
           <v-list-tile-title>Home</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile :class="isActiveRoute('about') ? activeClass : 'about'" @click="$router.push({ name: 'about' })">
+      <v-list-tile :class="isActiveRoute(/^about$/) ? activeClass : 'about'" @click="$router.push({ name: 'about' })">
         <v-list-tile-action>
           <v-icon>group</v-icon>
         </v-list-tile-action>
@@ -17,7 +17,7 @@
           <v-list-tile-title>About Us</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile :class="isActiveRoute('create') ? activeClass : 'create'" @click="$router.push({ name: 'create' })">
+      <v-list-tile :class="isActiveRoute(/^create$/) ? activeClass : 'create'" @click="$router.push({ name: 'create' })">
         <v-list-tile-action>
           <v-icon>add</v-icon>
         </v-list-tile-action>
@@ -25,7 +25,7 @@
           <v-list-tile-title>Create</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile :class="isActiveRoute('events') ? activeClass : 'events'" @click="$router.push({ name: 'events' })">
+      <v-list-tile :class="isActiveRoute(/^events.(created|accepted).(active|expired)$/) ? activeClass : 'events'" @click="$router.push({ name: 'events' })">
         <v-list-tile-action>
           <v-icon>event</v-icon>
         </v-list-tile-action>
@@ -60,8 +60,8 @@ export default class Navbar extends Vue {
     this.$emit('input', this.value);
   }
 
-  public isActiveRoute(route: string): boolean {
-    return (this.$router.currentRoute.name || '').indexOf(route) !== -1;
+  public isActiveRoute(route: RegExp): boolean {
+    return route.test(this.$router.currentRoute.name || '');
   }
 }
 </script>

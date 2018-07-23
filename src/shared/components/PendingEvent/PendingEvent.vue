@@ -5,6 +5,10 @@
       {{ event.name }}
     </p>
     <p>
+      <strong>Owner: </strong>
+      {{ event.owner.join(', ') }}
+    </p>
+    <p>
       <strong>Venue: </strong>
       {{ event.venue }}
     </p>
@@ -47,10 +51,10 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { IEvent } from '../../interface/IEvent';
 
 @Component({
-  name: 'ActiveEvent',
+  name: 'PendingEvent',
 })
-export default class ActiveEvent extends Vue {
-  @Prop({ required: true, type: Object})
+export default class PendingEvent extends Vue {
+  @Prop({ required: true, type: Object })
   public event: IEvent;
 
   public onAccept() {

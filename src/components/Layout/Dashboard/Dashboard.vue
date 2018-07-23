@@ -2,7 +2,10 @@
   <v-container fluid>
     <v-slide-y-transition mode="out-in">
       <v-layout row justify-center align-center>
-        <ActiveEvent v-for="event in activeEvents" :key="event.id" :event="event" />
+        <template v-if="pendingEvents.length">
+          <PendingEvent v-for="event in pendingEvents" :key="event.id" :event="event" />
+        </template>
+        <span v-else>No active Events to participate for now.</span>
       </v-layout>
     </v-slide-y-transition>
   </v-container>
@@ -10,16 +13,21 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import ActiveEvent from '../../../shared/components/ActiveEvent/ActiveEvent.vue';
+import PendingEvent from '@/shared/components/PendingEvent/PendingEvent.vue';
+import { EventTypes, EventStatus } from '@/shared/enum/EventsEnum';
 
 @Component({
   name: 'Dashboard',
   components: {
-    ActiveEvent,
+    PendingEvent,
   },
 })
 export default class Dashboard extends Vue {
-  public activeEvents = this.$store.getters.activeEvents;
+  public pendingEvents = this.$store.getters.pendingActiveEvents;
+
+  public beforeCreate() {
+    this.$store.dispatch('getEvents', { type: EventTypes.PENDING, status: EventStatus.ACTIVE });
+  }
 }
 </script>
 

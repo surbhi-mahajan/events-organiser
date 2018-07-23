@@ -3,11 +3,11 @@ export interface IParticipant {
 }
 
 export interface IEvent {
-  name: string;
+  id: number;
+  owner: number[];
   venue: string;
   startTime: number;
   endTime: number;
   event: string;
-  id: number;
-  participants?: IParticipant[];
+  participants?: number[];
 }

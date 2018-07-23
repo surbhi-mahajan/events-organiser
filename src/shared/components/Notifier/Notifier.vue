@@ -4,7 +4,7 @@
     dismissible
     :type="config.type"
     transition="scale-transition"
-    style="z-index: 999; position: fixed; left: 50%; transform: translateX(-50%); font-size: 15px; padding: 13px;"
+    style="z-index: 999; position: fixed; left: 50%; transform: translateX(-50%); font-size: 15px; padding: 13px; min-width: 450px; text-align: center"
   >
     {{ config.text }}
   </v-alert>
@@ -44,7 +44,7 @@ export default class Notifier extends Vue {
 
   public onToggle(
     isVisible: boolean,
-    { text, type = 'success' }: IConfig,
+    { text, type = 'success' }: IConfig = {} as IConfig,
   ): void {
     if (isVisible) {
       if (this.timer) {
