@@ -1,66 +1,69 @@
 <template>
-  <v-expansion-panel>
-    <v-expansion-panel-content
-      v-for="(acceptedEvent,$index) in acceptedEvents"
-      :key="$index"
-      style="padding: 10px 0px"
-    >
-      <div slot="header">
-        <v-layout row wrap style="padding: 5px 0px">
-          <v-flex xs12 sm6>
-            <strong>Owner: </strong>{{ acceptedEvent.name }}
-          </v-flex>
-          <v-flex xs12 sm6>
-            <strong>Start Time: </strong>{{ acceptedEvent.startTime | formatDate }}
-          </v-flex>
-        </v-layout>
-        <v-layout row wrap style="padding: 5px 0px">
-          <v-flex xs12 sm6>
-            <strong>Venue: </strong>{{ acceptedEvent.venue }}
-          </v-flex>
-          <v-flex xs12 sm6>
-            <strong>End Time: </strong>{{ acceptedEvent.endTime | formatDate }}
-          </v-flex>
-        </v-layout>
-      </div>
-      <v-card>
-        <v-card-text>
-            <v-data-table
-              :headers="headers"
-              :items="acceptedEvent.participants"
-              item-key="name"
-              hide-actions
-              class="elevation-1">
-              <template slot="items" slot-scope="props">
-                <td class="text-xs" >{{ props.item.name }}</td>
-              </template>
-            </v-data-table>
-        </v-card-text>
-      </v-card>
-    </v-expansion-panel-content>
-  </v-expansion-panel>
+  <v-container class="pa-0">
+    <v-layout row wrap>
+      <v-flex mb-5 elevation-2>
+        <v-tabs v-model="tabs.active" color="grey lighten-4" slider-color="blue">
+          <v-tab v-for="tab in tabs" :key="tab.name" ripple @click="$router.push({ name: tab.route })">
+              {{ tab.name }}
+          </v-tab>
+          <v-tab-item lazy v-for="tab in tabs" :key="tab.name">
+            <v-card flat>
+              <v-tabs v-model="tab.active" color="grey lighten-4" slider-color="blue">
+                <v-tab v-for="innerTab in tab.tabs" :key="innerTab.name" @click="$router.push({ name: innerTab.route })">
+                  {{ innerTab.name }}
+                </v-tab>
+                <v-tab-item v-for="innerTab in tab.tabs" :key="innerTab.name">
+                  <v-card flat>
+                    <v-card-text class="pa-0">
+                      <router-view/>
+                    </v-card-text>
+                  </v-card>
+                </v-tab-item>
+              </v-tabs>
+            </v-card>
+          </v-tab-item>
+        </v-tabs>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import { IAcceptedEvent } from '../../../shared/interface/IAcceptedEvent';
-
 @Component({
   name: 'Events',
 })
 export default class Events extends Vue {
-  public headers = [
+  public tabs = [
     {
-      text: 'Participant Name',
-      align: 'left',
-      sortable: true,
-      value: 'name',
+      name: 'Created Event',
+      route: 'events.created',
+      tabs: [
+        {
+          name: 'Active',
+          route: 'events.created.active',
+        },
+        {
+          name: 'Expired',
+          route: 'events.created.expired',
+        },
+      ],
+    },
+    {
+      name: 'Accepted Event',
+      route: 'events.accepted',
+      tabs: [
+        {
+          name: 'Active',
+          route: 'events.accepted.active',
+        },
+        {
+          name: 'Expired',
+          route: 'events.accepted.expired',
+        },
+      ],
     },
   ];
-  public acceptedEvents: IAcceptedEvent = this.$store.getters.acceptedEvents;
 }
 </script>
-
-<style scoped>
-</style>

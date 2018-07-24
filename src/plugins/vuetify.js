@@ -19,7 +19,8 @@ import {
   VSelect,
   VMenu,
   VDataTable,
-  VExpansionPanel
+  VExpansionPanel,
+  VTabs
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -43,6 +44,7 @@ Vue.use(Vuetify, {
     VSelect,
     VMenu,
     VDataTable,
-    VExpansionPanel
+    VExpansionPanel,
+    VTabs
   },
 })

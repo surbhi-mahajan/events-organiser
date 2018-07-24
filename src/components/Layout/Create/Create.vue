@@ -115,8 +115,8 @@ export default class Create extends Vue {
 
     public submitEvent() {
         const now = moment().format('DD-MM-YYYY');
-        const startTime = moment(now +  this.event.startTime, 'DD-MM-YYYY HH:mm').utc().unix() * 1000;
-        const endTime = moment(now +  this.event.endTime, 'DD-MM-YYYY HH:mm').utc().unix() * 1000;
+        const startTime = moment(now +  this.event.startTime, 'DD-MM-YYYY HH:mm').utc().unix();
+        const endTime = moment(now +  this.event.endTime, 'DD-MM-YYYY HH:mm').utc().unix();
         const event = {...this.event, startTime, endTime};
         this.$store.dispatch('addEvent', event);
         this.event = {} as IEvent;

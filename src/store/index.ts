@@ -1,15 +1,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
+import '../axios/interceptors';
 
+import { EventTypes, EventStatus } from '../shared/enum/EventsEnum';
 import { IEvent } from '../shared/interface/IEvent';
-import { IAcceptedEvent } from '../shared/interface/IAcceptedEvent';
+import { $notifier } from '@/shared/components/Notifier/plugin';
 
 Vue.use(Vuex);
 
 interface IState {
-  events: IEvent[];
-  categories: string[];
-  acceptedEvents: IAcceptedEvent[];
+  pendingActiveEvents: IEvent[];
+  createdActiveEvents: IEvent[];
+  createdExpiredEvents: IEvent[];
+  acceptedActiveEvents: IEvent[];
+  acceptedExpiredEvents: IEvent[];
 }
 
 export default new Vuex.Store({
@@ -18,81 +23,68 @@ export default new Vuex.Store({
         'football',
         'cricket',
     ],
-    events: [
-      {
-        name: 'Surbhi Mahajan',
-        venue: 'abc palace',
-        startTime: 1531567476,
-        endTime: 1532025000,
-        event: 'football',
-        id: 123456,
-      },
-      {
-        name: 'Punit Gupta',
-        venue: 'pqr palace',
-        startTime: 1531564450,
-        endTime: 1532025030,
-        event: 'cricket',
-        id: 31232,
-      },
-    ],
-    acceptedEvents: [
-      {
-        name: 'Prateek',
-        venue: 'sdf palace',
-        startTime: 1531567476,
-        endTime: 1532025000,
-        event: 'badminton',
-        id: 1276456,
-        participants: [
-          {
-            name: 'Surbhi Mahajan',
-          },
-        ],
-      },
-      {
-        name: 'Manas',
-        venue: 'er palace',
-        startTime: 1531564450,
-        endTime: 1532025030,
-        event: 'carrom',
-        id: 312232,
-        participants: [
-          {
-            name: 'Surbhi Mahajan',
-          },
-          {
-            name: 'Punit Gupta',
-          },
-        ],
-      },
-    ],
+    pendingActiveEvents: [],
+    createdActiveEvents: [],
+    createdExpiredEvents: [],
+    acceptedActiveEvents: [],
+    acceptedExpiredEvents: [],
   },
   getters: {
     categories(state: IState): string[] {
       return state.categories;
     },
-    activeEvents(state: IState): IEvent[] {
-      return state.events;
+    pendingActiveEvents(state: IState): IEvent[] {
+      return state.pendingActiveEvents;
     },
-    acceptedEvents(state: IState): IAcceptedEvent[] {
-      return state.acceptedEvents;
+    acceptedActiveEvents(state: IState): IEvent[] {
+      return state.acceptedActiveEvents;
+    },
+    acceptedExpiredEvents(state: IState): IEvent[] {
+      return state.acceptedExpiredEvents;
+    },
+    createdActiveEvents(state: IState): IEvent[] {
+      return state.createdActiveEvents;
+    },
+    createdExpiredEvents(state: IState): IEvent[] {
+      return state.createdExpiredEvents;
     },
   },
   mutations: {
-    acceptEvent(state: IState, id: number) {
-      for (const [index, event] of state.events.entries()) {
-        if (event.id === id) {
-          state.events.splice(index, 1);
+    storependingActiveEvents(state: IState, events: IEvent[]) {
+      state.pendingActiveEvents.splice(0, state.pendingActiveEvents.length, ...events);
+    },
+
+    storeCreatedActiveEvents(state: IState, events: IEvent[]) {
+      state.createdActiveEvents.splice(0, state.createdActiveEvents.length, ...events);
+    },
+
+    storeCreatedExpiredEvents(state: IState, events: IEvent[]) {
+      state.createdExpiredEvents.splice(0, state.createdExpiredEvents.length, ...events);
+    },
+
+    storeAcceptedActiveEvents(state: IState, events: IEvent[]) {
+      state.acceptedActiveEvents.splice(0, state.acceptedActiveEvents.length, ...events);
+    },
+
+    storeAcceptedExpiredEvents(state: IState, events: IEvent[]) {
+      state.acceptedExpiredEvents.splice(0, state.acceptedExpiredEvents.length, ...events);
+    },
+
+    acceptEvent(state: IState, eventId: number) {
+      for (const [index, event] of state.pendingActiveEvents.entries()) {
+        if (event.id === eventId) {
+          const acceptedEvent = state.pendingActiveEvents.splice(index, 1)[0];
+          state.acceptedActiveEvents.push(acceptedEvent);
           return;
         }
       }
     },
 
-    rejectEvent(state: IState, id: number) {
-      for (const [index, event] of state.events.entries()) {
-        if (event.id === id) {
-          state.events.splice(index, 1);
+    // Only doing at frontend for now, may store in local storage
+    rejectEvent(state: IState, eventId: number) {
+      for (const [index, event] of state.pendingActiveEvents.entries()) {
+        if (event.id === eventId) {
+          state.pendingActiveEvents.splice(index, 1);
           return;
         }
       }
@@ -103,12 +95,49 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    acceptEvent({ commit }, id: number) {
-      commit('acceptEvent', id);
+    login(context, payload) {
+      return axios.post('/api/login', payload)
+        .then((res) => {
+          localStorage.setItem('userID', res.data.success.id);
+          $notifier.hide();
+        })
+        .catch(() => void 0);
     },
 
-    rejectEvent({ commit }, id: number) {
-      commit('rejectEvent', id);
+    getEvents({ commit }, { type , status }: { type: EventTypes, status: EventStatus }) {
+      return axios.get('/api/events', {
+        params: {
+          type,
+          status,
+        },
+      })
+        .then((res) => {
+          const mutationFunName = function getMutationFunctionName() {
+            switch (type) {
+              case EventTypes.PENDING:
+                return status === EventStatus.ACTIVE ? 'storependingActiveEvents' : '';
+              case EventTypes.CREATED:
+                return status === EventStatus.ACTIVE ? 'storeCreatedActiveEvents' : 'storeCreatedExpiredEvents';
+              case EventTypes.ACCEPTED:
+                return status === EventStatus.ACTIVE ? 'storeAcceptedActiveEvents' : 'storeAcceptedExpiredEvents';
+              default:
+                throw new Error('Event type didn\'t match the expected types!');
+            }
+          }();
+
+          commit(mutationFunName, res.data.success);
+        });
+    },
+
+    acceptEvent({ commit }, eventId: number) {
+      return axios.post(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
+        .then(() => {
+          commit('acceptEvent', eventId);
+        });
+    },
+
+    rejectEvent({ commit }, eventId: number) {
+      return commit('rejectEvent', eventId);
     },
 
     addEvent({ commit }, event: IEvent) {

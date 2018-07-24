@@ -11,7 +11,7 @@ const routerInstance = new Router({
 
 routerInstance.beforeEach((to, from, next) => {
   let redirectTo;
-  const email = sessionStorage.getItem('email');
+  const email = localStorage.getItem('userID');
 
   if (to.name === 'login') {
     redirectTo = email ? '/' : redirectTo;

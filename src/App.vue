@@ -9,6 +9,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import Notifier from './shared/components/Notifier/Notifier.vue';
+
 @Component({
   components: {
     Notifier,

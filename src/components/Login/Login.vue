@@ -39,8 +39,10 @@ export default class Login extends Vue {
 
   public onLogin() {
     // TODO: Implement actual Login
-    sessionStorage.setItem('email', this.email);
-    this.$router.push({ name: 'dashboard' });
+    this.$store.dispatch('login', { email: this.email, password: this.password })
+      .then(() => {
+        this.$router.push({ name: 'dashboard' });
+      });
   }
 }
 </script>
