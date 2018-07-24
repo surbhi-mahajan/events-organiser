@@ -1,10 +1,12 @@
-const { APIs } = require('./server')
+const { server } = require(
+    './server'
+)
 
 module.exports = {
   lintOnSave: false,
   devServer: {
     before(app) {
-      APIs(app)
+      server(app)
     }
   }
 }
