@@ -1,4 +1,3 @@
-/*
 const moment = require('moment-timezone')
 const bodyParser = require('body-parser');
 
@@ -32,7 +31,7 @@ const EVENT_STATUS = {
     EXPIRED: 'expired'
 }
 
-exports.APIs = (app) => {
+exports.server = (app) => {
     //support parsing of application/json type post data
     app.use(bodyParser.json());
 
@@ -179,33 +178,32 @@ exports.APIs = (app) => {
     })
 
 }
-*/
-const express = require('express')
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const wrench = require('wrench');
-mongoose.Promise = global.Promise;
-//config
-const config = require('./src/config');
+// const express = require('express')
+// const bodyParser = require('body-parser');
+// const mongoose = require('mongoose');
+// const wrench = require('wrench');
+// mongoose.Promise = global.Promise;
+// //config
+// const config = require('./src/config');
 
 
-exports.server = (app) => {
-    //db connection
-    mongoose.connect(config.mongoDBConfig.dbUri,null,function(err) {
-        if (err) {
-            console.error('Could not connect to MongoDB!');
-            console.log(err);
-        }
-    });
+// exports.server = (app) => {
+//     //db connection
+//     mongoose.connect(config.mongoDBConfig.dbUri, null, (err) => {
+//         if (err) {
+//             console.error('Could not connect to MongoDB!');
+//             console.log(err);
+//         }
+//     });
 
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(express.static(__dirname));
+//     app.use(bodyParser.json());
+//     app.use(bodyParser.urlencoded({ extended: true }));
+//     app.use(express.static(__dirname));
 
-    wrench.readdirSyncRecursive(__dirname + '/src/models').map(function(file) {
-        require(__dirname + '/src/models/'+file);
-    });
+//     wrench.readdirSyncRecursive(__dirname + '/src/models').map(function(file) {
+//         require(__dirname + '/src/models/'+file);
+//     });
 
-    require(__dirname +'/src/routes/app.server.routes')(app);
-}
+//     require(__dirname +'/src/routes/app.server.routes')(app);
+// }
 

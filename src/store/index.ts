@@ -10,6 +10,7 @@ import { $notifier } from '@/shared/components/Notifier/plugin';
 Vue.use(Vuex);
 
 interface IState {
+  categories: string[];
   pendingActiveEvents: IEvent[];
   createdActiveEvents: IEvent[];
   createdExpiredEvents: IEvent[];
@@ -20,8 +21,10 @@ interface IState {
 export default new Vuex.Store({
   state: {
     categories: [
-        'football',
-        'cricket',
+        'Football',
+        'Cricket',
+        'Badminton',
+        'Chess',
     ],
     pendingActiveEvents: [],
     createdActiveEvents: [],
@@ -91,7 +94,7 @@ export default new Vuex.Store({
     },
 
     addEvent(state: IState, event: IEvent) {
-        state.events.push(event);
+        state.createdActiveEvents.push(event);
     },
   },
   actions: {
@@ -141,7 +144,10 @@ export default new Vuex.Store({
     },
 
     addEvent({ commit }, event: IEvent) {
-        commit('addEvent', event);
+      return axios.post(`/api/events`, event)
+        .then(() => {
+          commit('addEvent', event);
+        });
     },
 
   },

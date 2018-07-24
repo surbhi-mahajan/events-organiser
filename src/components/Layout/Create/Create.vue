@@ -1,25 +1,19 @@
 <template>
     <v-container fluid>
         <v-form ref="form" lazy-validation>
-            <v-text-field
+
+            <v-select
                 v-model="event.name"
-                :counter="10"
-                label="Name"
+                :items="categories"
+                label="Event"
                 required
-            ></v-text-field>
+            ></v-select>
 
             <v-text-field
                 v-model="event.venue"
                 label="Venue"
                 required
             ></v-text-field>
-
-            <v-select
-                v-model="event.event"
-                :items="categories"
-                label="Events"
-                required
-            ></v-select>
 
             <v-layout row wrap>
                 <v-flex xs11 sm5>
@@ -115,11 +109,14 @@ export default class Create extends Vue {
 
     public submitEvent() {
         const now = moment().format('DD-MM-YYYY');
-        const startTime = moment(now +  this.event.startTime, 'DD-MM-YYYY HH:mm').utc().unix();
-        const endTime = moment(now +  this.event.endTime, 'DD-MM-YYYY HH:mm').utc().unix();
+        const startTime = this.event.startTime && moment(now +  this.event.startTime, 'DD-MM-YYYY HH:mm').utc().unix();
+        const endTime = this.event.endTime && moment(now +  this.event.endTime, 'DD-MM-YYYY HH:mm').utc().unix();
         const event = {...this.event, startTime, endTime};
-        this.$store.dispatch('addEvent', event);
-        this.event = {} as IEvent;
+        this.$store.dispatch('addEvent', event)
+            .then(() => {
+                this.event = {} as IEvent;
+                this.$notifier.show({ text: 'Event has been added successfully.', type: 'success' });
+        });
     }
 
 }

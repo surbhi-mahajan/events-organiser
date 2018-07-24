@@ -12,10 +12,7 @@ const repository = require('../repositories/app.server.repository');
 module.exports = function (app) {
     expressApp = app;
     registerEndpoint(
-        require('../controllers/app.server.controller')(
-            repository
-
-        )
+        require('../controllers/app.server.controller')(repository)
     );
 };
 function registerEndpoint(endpoint) {
