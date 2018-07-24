@@ -4,7 +4,7 @@ exports.eventType = {
     PENDING: 'pending'
 }
 
-exports.status = {
+exports.eventStatus = {
     ACTIVE: 'active',
-    INACTIVE: 'inactive'
+    EXPIRED: 'expired'
 }

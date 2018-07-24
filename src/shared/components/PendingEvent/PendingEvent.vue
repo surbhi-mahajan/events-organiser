@@ -1,12 +1,12 @@
 <template>
   <div style="border: 1px solid black; padding: 10px; margin: 10px;">
     <p>
-      <strong>Name: </strong>
+      <strong>Event: </strong>
       {{ event.name }}
     </p>
     <p>
       <strong>Owner: </strong>
-      {{ event.owner.join(', ') }}
+      {{ event.owner[0].name }}
     </p>
     <p>
       <strong>Venue: </strong>
@@ -19,10 +19,6 @@
     <p>
       <strong>End Time: </strong>
       {{ event.endTime | formatDate }}
-    </p>
-    <p>
-      <strong>Sport: </strong>
-      {{ event.event }}
     </p>
     <v-layout row wrap class="text-xs-center">
       <v-flex sm6>

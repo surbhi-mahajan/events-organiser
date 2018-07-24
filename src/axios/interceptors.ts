@@ -15,7 +15,10 @@ axios.interceptors.response.use((response) => {
         return Promise.reject(response.data.error);
     }
     return response;
-  }, (error) => {
-        $notifier.show({ text: 'Oops! Something went wrong. Please try again.', type: 'error' });
-        return Promise.reject(error);
+  }, (config) => {
+        $notifier.show({
+            text: config.response.data.error || 'Oops! Something went wrong. Please try again.',
+            type: 'error',
+        });
+        return Promise.reject(config.response.data.error);
   });

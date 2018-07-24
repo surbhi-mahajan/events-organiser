@@ -129,14 +129,16 @@ export default new Vuex.Store({
           }();
 
           commit(mutationFunName, res.data.success);
-        });
+        })
+        .catch(() => void 0);
     },
 
     acceptEvent({ commit }, eventId: number) {
       return axios.post(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
         .then(() => {
           commit('acceptEvent', eventId);
-        });
+        })
+        .catch(() => void 0);
     },
 
     rejectEvent({ commit }, eventId: number) {
@@ -147,7 +149,8 @@ export default new Vuex.Store({
       return axios.post(`/api/events`, event)
         .then(() => {
           commit('addEvent', event);
-        });
+        })
+        .catch(() => void 0);
     },
 
   },

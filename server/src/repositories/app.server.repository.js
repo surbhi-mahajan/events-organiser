@@ -5,35 +5,39 @@ const moment = require('moment');
 const User = mongoose.model("User");
 const Event = mongoose.model("Event");
 
-module.exports={
-     findActivePendingEvents:function(userId){
-         let utcNow = moment.utc().unix();
-         return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { $gt: utcNow }}).populate('owner participants')
-     },
-     findInActivePendingEvents: function(){
-         let utcNow = moment.utc().unix();
-         return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { $lte: utcNow }}).populate('owner participants')
-     },
-     findActiveCreatedEvents:function(userId){
-         let utcNow = moment.utc().unix();
-         return Event.find({ owner: { $in: [userId] }, endTime: { $gt: utcNow }}).populate('owner participants')
-     },
-     findInActiveCreatedEvents:function(userId){
-        let utcNow = moment.utc().unix();
-        return Event.find({ owner: { $in: [userId] }, endTime: { $lte: utcNow }}).populate('owner participants')
-     },
-     findActiveAcceptedEvents:function(userId){
-         let utcNow = moment.utc().unix();
-         return Event.find({ participants: { $in: [userId]}, endTime: { $gt: utcNow }}).populate('owner participants')
-     },
-    findInActiveAcceptedEvents:function(userId){
-        let utcNow = moment.utc().unix();
-        return Event.find({ participants: { $in: [userId]}, endTime: { $lte: utcNow }}).populate('owner participants')
+const { eventStatus } = require('../constants')
+
+module.exports = {
+
+    findUser(email, password) {
+        return User.findOne({ email, password })
     },
-    save:function(event){
+
+    findUserById(userId) {
+        return User.findOne({ _id: userId })
+    },
+
+    findEventById(eventId) {
+        return Event.findOne({ _id: eventId })
+    },
+
+    findPendingEvents(userId, status = eventStatus.ACTIVE){
+        let utcNow = moment.utc().unix();
+        return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name')
+    },
+
+    findCreatedEvents(userId, status = eventStatus.ACTIVE){
+        let utcNow = moment.utc().unix();
+        return Event.find({ owner: { $in: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name')
+    },
+    findAcceptedEvents(userId, status = eventStatus.ACTIVE){
+        let utcNow = moment.utc().unix();
+        return Event.find({ participants: { $in: [userId]}, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name')
+    },
+    save(event){
        return new Event(event).save();
     },
-    updateEvent:function(eventId, userIds){
+    updateEvent(eventId, userIds){
         return Event.update({ _id: eventId }, { $addToSet: { participants: { $each: userIds }}})
     }
 }
