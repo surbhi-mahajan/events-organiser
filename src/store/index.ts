@@ -19,6 +19,10 @@ interface IState {
 
 export default new Vuex.Store({
   state: {
+    categories: [
+        'football',
+        'cricket',
+    ],
     pendingActiveEvents: [],
     createdActiveEvents: [],
     createdExpiredEvents: [],
@@ -26,6 +30,9 @@ export default new Vuex.Store({
     acceptedExpiredEvents: [],
   },
   getters: {
+    categories(state: IState): string[] {
+      return state.categories;
+    },
     pendingActiveEvents(state: IState): IEvent[] {
       return state.pendingActiveEvents;
     },
@@ -82,6 +89,10 @@ export default new Vuex.Store({
         }
       }
     },
+
+    addEvent(state: IState, event: IEvent) {
+        state.events.push(event);
+    },
   },
   actions: {
     login(context, payload) {
@@ -128,5 +139,10 @@ export default new Vuex.Store({
     rejectEvent({ commit }, eventId: number) {
       return commit('rejectEvent', eventId);
     },
+
+    addEvent({ commit }, event: IEvent) {
+        commit('addEvent', event);
+    },
+
   },
 });

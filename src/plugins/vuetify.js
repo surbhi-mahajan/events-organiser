@@ -15,6 +15,9 @@ import {
   VForm,
   VTextField,
   VAlert,
+  VTimePicker,
+  VSelect,
+  VMenu,
   VDataTable,
   VExpansionPanel,
   VTabs
@@ -37,6 +40,9 @@ Vue.use(Vuetify, {
     VForm,
     VTextField,
     VAlert,
+    VTimePicker,
+    VSelect,
+    VMenu,
     VDataTable,
     VExpansionPanel,
     VTabs
