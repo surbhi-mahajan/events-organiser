@@ -37,7 +37,7 @@ module.exports = {
     save(event){
        return new Event(event).save();
     },
-    updateEvent(eventId, userIds){
-        return Event.update({ _id: eventId }, { $addToSet: { participants: { $each: userIds }}})
+    updateEvent(eventId, userId, status){
+        return Event.update({ _id: eventId,  owner: { $nin: [userId] }}, { $addToSet: { participants: userId }})
     }
 }

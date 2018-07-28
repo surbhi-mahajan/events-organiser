@@ -75,7 +75,7 @@ export default new Vuex.Store({
 
     acceptEvent(state: IState, eventId: number) {
       for (const [index, event] of state.pendingActiveEvents.entries()) {
-        if (event.id === eventId) {
+        if (event._id === eventId) {
           const acceptedEvent = state.pendingActiveEvents.splice(index, 1)[0];
           state.acceptedActiveEvents.push(acceptedEvent);
           return;
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     // Only doing at frontend for now, may store in local storage
     rejectEvent(state: IState, eventId: number) {
       for (const [index, event] of state.pendingActiveEvents.entries()) {
-        if (event.id === eventId) {
+        if (event._id === eventId) {
           state.pendingActiveEvents.splice(index, 1);
           return;
         }
@@ -132,7 +132,7 @@ export default new Vuex.Store({
     },
 
     acceptEvent({ commit }, eventId: number) {
-      return axios.post(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
+      return axios.put(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
         .then(() => {
           return commit('acceptEvent', eventId);
         });

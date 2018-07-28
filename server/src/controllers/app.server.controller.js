@@ -129,7 +129,7 @@ module.exports = (respository) => {
             })
     });
 
-    router.put('/event/:eventID', (req, res) => {
+    router.put('/events/:eventID', (req, res) => {
         const userId = req.headers.authorization
         const eventID = req.params.eventID
         const status = req.body.status
@@ -144,17 +144,13 @@ module.exports = (respository) => {
 
         respository.updateEvent(eventID, userId, status)
             .then(event => {
-                if (!event) {
-                    response.error = 'No event registered for given ID.'
-                } else if (event.participants.includes(userId)) {
-                    response.error = 'Already accepted the event.'
-                } else if (event.owner.includes(userId)) {
-                    response.error = 'Cannot accept own event.'
-                } else {
-                    response.success = 'Successfully accepted the event'
-                }
-
-                res.send(response)
+              if(!event.nModified){
+                response.error = 'Unable to accept the event'
+              }
+              else {
+                response.success = 'Successfully accepted the event'
+              }
+              res.send(response)
             })
             .catch((err) => {
                 res.send({
