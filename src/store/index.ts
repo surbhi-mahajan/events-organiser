@@ -75,7 +75,7 @@ export default new Vuex.Store({
 
     acceptEvent(state: IState, eventId: number) {
       for (const [index, event] of state.pendingActiveEvents.entries()) {
-        if (event.id === eventId) {
+        if (event._id === eventId) {
           const acceptedEvent = state.pendingActiveEvents.splice(index, 1)[0];
           state.acceptedActiveEvents.push(acceptedEvent);
           return;
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     // Only doing at frontend for now, may store in local storage
     rejectEvent(state: IState, eventId: number) {
       for (const [index, event] of state.pendingActiveEvents.entries()) {
-        if (event.id === eventId) {
+        if (event._id === eventId) {
           state.pendingActiveEvents.splice(index, 1);
           return;
         }
@@ -103,8 +103,7 @@ export default new Vuex.Store({
         .then((res) => {
           localStorage.setItem('userID', res.data.success.id);
           $notifier.hide();
-        })
-        .catch(() => void 0);
+        });
     },
 
     getEvents({ commit }, { type , status }: { type: EventTypes, status: EventStatus }) {
@@ -128,14 +127,14 @@ export default new Vuex.Store({
             }
           }();
 
-          commit(mutationFunName, res.data.success);
+          return commit(mutationFunName, res.data.success);
         });
     },
 
     acceptEvent({ commit }, eventId: number) {
-      return axios.post(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
+      return axios.put(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
         .then(() => {
-          commit('acceptEvent', eventId);
+          return commit('acceptEvent', eventId);
         });
     },
 
@@ -146,9 +145,8 @@ export default new Vuex.Store({
     addEvent({ commit }, event: IEvent) {
       return axios.post(`/api/events`, event)
         .then(() => {
-          commit('addEvent', event);
+          return commit('addEvent', event);
         });
     },
-
   },
 });

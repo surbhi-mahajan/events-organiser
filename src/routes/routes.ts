@@ -9,11 +9,6 @@ export const routes = [
         component: () => import('../components/Layout/Dashboard/Dashboard.vue'),
       },
       {
-        name: 'about',
-        path: '/about',
-        component: () => import('../components/Layout/About/About.vue'),
-      },
-      {
           name: 'create',
           path: '/create',
           component: () => import('../components/Layout/Create/Create.vue'),

@@ -27,7 +27,8 @@ export default class AcceptedActiveEvents extends Vue {
   public acceptedActiveEvents: IEvent = this.$store.getters.acceptedActiveEvents;
 
   public created() {
-    this.$store.dispatch('getEvents', { type: EventTypes.ACCEPTED, status: EventStatus.ACTIVE });
+    this.$store.dispatch('getEvents', { type: EventTypes.ACCEPTED, status: EventStatus.ACTIVE })
+      .catch(() => void 0);
   }
 }
 </script>
