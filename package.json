@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "deploy": "yarn build && cd server && git add . && git commit -m 'deploying' && git push heroku master"
+    "deploy": "yarn build && cd server && yarn deploy"
   },
   "dependencies": {
     "@types/moment-timezone": "^0.5.6",
