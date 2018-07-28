@@ -1,13 +1,15 @@
 <template>
-  <v-alert
-    v-model="isVisible"
-    dismissible
-    :type="config.type"
-    transition="scale-transition"
-    style="z-index: 999; position: fixed; left: 50%; transform: translateX(-50%); font-size: 15px; padding: 13px; min-width: 450px; text-align: center"
-  >
-    {{ config.text }}
-  </v-alert>
+  <v-snackbar
+      v-model="isVisible"
+      :timeout="0"
+      :color="config.type"
+      top
+    >
+    <span style="margin: auto;">{{ config.text }}</span>
+    <a @click="isVisible = false">
+      <v-icon style="color: rgba(0,0,0,0.3);" right>cancel</v-icon>
+    </a>
+  </v-snackbar>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';

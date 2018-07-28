@@ -4,7 +4,7 @@
       <v-expansion-panel-content
         v-for="(event,$index) in events"
         :key="$index"
-        style="padding: 10px 0px"
+        class="expansion-panel-container"
       >
         <div slot="header">
           <v-layout row wrap style="padding: 5px 0px">
@@ -12,12 +12,12 @@
               <strong>Owner: </strong>{{ event.name }}
             </v-flex>
             <v-flex xs12 sm6>
-              <strong>Start Time: </strong>{{ event.startTime | formatDate }}
+              <strong>Venue: </strong>{{ event.venue }}
             </v-flex>
           </v-layout>
           <v-layout row wrap style="padding: 5px 0px">
             <v-flex xs12 sm6>
-              <strong>Venue: </strong>{{ event.venue }}
+              <strong>Start Time: </strong>{{ event.startTime | formatDate }}
             </v-flex>
             <v-flex xs12 sm6>
               <strong>End Time: </strong>{{ event.endTime | formatDate }}
@@ -32,7 +32,10 @@
                 hide-actions
                 class="elevation-1">
                 <template slot="items" slot-scope="props">
-                  <td class="text-xs" >{{ props.item }}</td>
+                  <td class="text-xs" >{{ props.item.name }}</td>
+                </template>
+                <template slot="no-data">
+                    No participants yet.
                 </template>
               </v-data-table>
           </v-card-text>
@@ -57,7 +60,7 @@ export default class CreatedOrAcceptedEvents extends Vue {
 
   public headers = [
     {
-      text: 'Participants Name',
+      text: 'Participants',
       align: 'left',
       sortable: true,
       value: 'name',
@@ -66,5 +69,8 @@ export default class CreatedOrAcceptedEvents extends Vue {
 }
 </script>
 
-<style scoped>
+<style>
+.expansion-panel-container .v-expansion-panel__header {
+  height: auto
+}
 </style>

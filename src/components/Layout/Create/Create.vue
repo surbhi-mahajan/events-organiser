@@ -129,6 +129,7 @@
             </v-layout>
 
             <v-btn
+                color="success"
                 @click="submitEvent"
             >
                 Submit

@@ -12,6 +12,7 @@ module.exports = (respository) => {
                 const response = {}
 
                 if (user) {
+                    // Can access '_id' be 'id'
                     response.success = { id: user.id }
                 } else {
                     response.error = 'Incorrect Email ID or Password.'
@@ -116,9 +117,9 @@ module.exports = (respository) => {
         respository.findEventById(eventID)
             .then(event => {
                 if (!event) {
-                    res.error = 'No event registered for given ID.'
+                    response.error = 'No event registered for given ID.'
                 } else {
-                    res.success = event
+                    response.success = event
                 }
                 res.send(response)
             })
@@ -145,10 +146,10 @@ module.exports = (respository) => {
         respository.updateEvent(eventID, userId, status)
             .then(event => {
               if(!event.nModified){
-                response.error = 'Unable to accept the event'
+                response.error = 'Unable to accept the event.'
               }
               else {
-                response.success = 'Successfully accepted the event'
+                response.success = 'Event accepted successfully.'
               }
               res.send(response)
             })

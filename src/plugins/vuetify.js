@@ -21,7 +21,8 @@ import {
   VDataTable,
   VExpansionPanel,
   VTabs,
-  VDatePicker
+  VDatePicker,
+  VSnackbar
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -47,6 +48,7 @@ Vue.use(Vuetify, {
     VDataTable,
     VExpansionPanel,
     VTabs,
-    VDatePicker
+    VDatePicker,
+    VSnackbar
   },
 })

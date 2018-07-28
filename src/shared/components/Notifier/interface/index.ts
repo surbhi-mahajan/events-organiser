@@ -1,4 +1,4 @@
 export interface IConfig {
   text: string;
-  type: string;
+  type: 'success' | 'info' | 'error' | 'cyan darken-2';
 }

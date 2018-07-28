@@ -23,16 +23,16 @@ module.exports = {
 
     findPendingEvents(userId, status = eventStatus.ACTIVE){
         let utcNow = moment.utc().unix();
-        return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name')
+        return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}, { _id: 0 }).populate('owner participants', 'name -_id')
     },
 
     findCreatedEvents(userId, status = eventStatus.ACTIVE){
         let utcNow = moment.utc().unix();
-        return Event.find({ owner: { $in: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name')
+        return Event.find({ owner: { $in: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}, { _id: 0 }).populate('owner participants', 'name -_id')
     },
     findAcceptedEvents(userId, status = eventStatus.ACTIVE){
         let utcNow = moment.utc().unix();
-        return Event.find({ participants: { $in: [userId]}, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name')
+        return Event.find({ participants: { $in: [userId]}, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}, { _id: 0 }).populate('owner participants', 'name -_id')
     },
     save(event){
        return new Event(event).save();
