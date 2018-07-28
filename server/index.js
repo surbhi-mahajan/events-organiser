@@ -1,28 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const wrench = require('wrench');
-const config = require('./src/config');
+const app = express();
+const { server } = require('./app')
+const path = require('path')
 
-mongoose.Promise = global.Promise;
+// process.env.PORT lets the port be set by Heroku
+const port = process.env.PORT || 8089;
 
-exports.server = (app) => {
-    //db connection
-    mongoose.connect(config.mongoDBConfig.dbUri, null, (err) => {
-        if (err) {
-            console.error('Could not connect to MongoDB!');
-            console.log(err);
-        }
-    });
+app.use(express.static(path.join(__dirname, 'dist')));
 
-    app.use(bodyParser.json());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(express.static(__dirname));
+server(app);
 
-    wrench.readdirSyncRecursive(__dirname + '/src/models').map(function(file) {
-        require(__dirname + '/src/models/' + file);
-    });
+app.all('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+});
 
-    require(__dirname +'/src/routes/app.server.routes')(app);
-}
+app.listen(port, () => console.log(`Listening on port ${ port }...`))
 
