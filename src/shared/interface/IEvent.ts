@@ -3,7 +3,7 @@ export interface IParticipant {
 }
 
 export interface IEvent {
-  id: number;
+  _id: number;
   owner: number[];
   venue: string;
   startTime: number;
