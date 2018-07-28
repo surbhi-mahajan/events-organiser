@@ -83,6 +83,8 @@ module.exports = (respository) => {
             response.error = 'Invalid End Time.'
         } else if (!name && typeof name !== 'string') {
             response.error = 'Invalid Event Name.'
+        } else if (endTime <= startTime) {
+            response.error = 'End time should be more than start time.'
         } else {
             return respository.save({
                 owner: [userId],
@@ -146,6 +148,8 @@ module.exports = (respository) => {
                     response.error = 'No event registered for given ID.'
                 } else if (event.participants.includes(userId)) {
                     response.error = 'Already accepted the event.'
+                } else if (event.owner.includes(userId)) {
+                    response.error = 'Cannot accept own event.'
                 } else {
                     response.success = 'Successfully accepted the event'
                 }

@@ -27,7 +27,8 @@ export default class AcceptedExpiredEvents extends Vue {
   public acceptedExpiredEvents: IEvent = this.$store.getters.acceptedExpiredEvents;
 
   public beforeCreate() {
-    this.$store.dispatch('getEvents', { type: EventTypes.ACCEPTED, status: EventStatus.EXPIRED });
+    this.$store.dispatch('getEvents', { type: EventTypes.ACCEPTED, status: EventStatus.EXPIRED })
+      .catch(() => void 0);
   }
 }
 </script>

@@ -8,6 +8,6 @@ export interface IEvent {
   venue: string;
   startTime: number;
   endTime: number;
-  event: string;
+  name: string;
   participants?: number[];
 }

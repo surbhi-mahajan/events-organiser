@@ -9,14 +9,6 @@
           <v-list-tile-title>Home</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile :class="isActiveRoute(/^about$/) ? activeClass : 'about'" @click="$router.push({ name: 'about' })">
-        <v-list-tile-action>
-          <v-icon>group</v-icon>
-        </v-list-tile-action>
-        <v-list-tile-content>
-          <v-list-tile-title>About Us</v-list-tile-title>
-        </v-list-tile-content>
-      </v-list-tile>
       <v-list-tile :class="isActiveRoute(/^create$/) ? activeClass : 'create'" @click="$router.push({ name: 'create' })">
         <v-list-tile-action>
           <v-icon>add</v-icon>

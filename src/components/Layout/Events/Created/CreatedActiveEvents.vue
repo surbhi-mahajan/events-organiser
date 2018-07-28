@@ -27,7 +27,8 @@ export default class CreatedActiveEvents extends Vue {
   public createdActiveEvents: IEvent = this.$store.getters.createdActiveEvents;
 
   public beforeCreate() {
-    this.$store.dispatch('getEvents', { type: EventTypes.CREATED, status: EventStatus.ACTIVE });
+    this.$store.dispatch('getEvents', { type: EventTypes.CREATED, status: EventStatus.ACTIVE })
+      .catch(() => void 0);
   }
 }
 </script>

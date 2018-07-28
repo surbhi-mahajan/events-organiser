@@ -54,13 +54,19 @@ export default class PendingEvent extends Vue {
   public event: IEvent;
 
   public onAccept() {
-    this.$store.dispatch('acceptEvent', this.event.id);
-    this.$notifier.show({ text: 'Event has been accepted successfully.', type: 'success' });
+    this.$store.dispatch('acceptEvent', this.event.id)
+      .then(() => {
+        this.$notifier.show({ text: 'Event has been accepted successfully.', type: 'success' });
+      })
+      .catch(() => void 0);
   }
 
   public onReject() {
-    this.$store.dispatch('rejectEvent', this.event.id);
-    this.$notifier.show({ text: 'Event has been rejected successfully.', type: 'success' });
+    this.$store.dispatch('rejectEvent', this.event.id)
+      .then(() => {
+        this.$notifier.show({ text: 'Event has been rejected successfully.', type: 'success' });
+      })
+      .catch(() => void 0);
   }
 }
 </script>

@@ -103,8 +103,7 @@ export default new Vuex.Store({
         .then((res) => {
           localStorage.setItem('userID', res.data.success.id);
           $notifier.hide();
-        })
-        .catch(() => void 0);
+        });
     },
 
     getEvents({ commit }, { type , status }: { type: EventTypes, status: EventStatus }) {
@@ -128,17 +127,15 @@ export default new Vuex.Store({
             }
           }();
 
-          commit(mutationFunName, res.data.success);
-        })
-        .catch(() => void 0);
+          return commit(mutationFunName, res.data.success);
+        });
     },
 
     acceptEvent({ commit }, eventId: number) {
       return axios.post(`/api/events/${ eventId }`, { status: EventTypes.ACCEPTED })
         .then(() => {
-          commit('acceptEvent', eventId);
-        })
-        .catch(() => void 0);
+          return commit('acceptEvent', eventId);
+        });
     },
 
     rejectEvent({ commit }, eventId: number) {
@@ -148,10 +145,8 @@ export default new Vuex.Store({
     addEvent({ commit }, event: IEvent) {
       return axios.post(`/api/events`, event)
         .then(() => {
-          commit('addEvent', event);
-        })
-        .catch(() => void 0);
+          return commit('addEvent', event);
+        });
     },
-
   },
 });

@@ -26,7 +26,8 @@ export default class Dashboard extends Vue {
   public pendingEvents = this.$store.getters.pendingActiveEvents;
 
   public beforeCreate() {
-    this.$store.dispatch('getEvents', { type: EventTypes.PENDING, status: EventStatus.ACTIVE });
+    this.$store.dispatch('getEvents', { type: EventTypes.PENDING, status: EventStatus.ACTIVE })
+      .catch(() => void 0);
   }
 }
 </script>
