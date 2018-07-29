@@ -23,7 +23,7 @@ module.exports = {
 
     findPendingEvents(userId, status = eventStatus.ACTIVE){
         let utcNow = moment.utc().unix();
-        return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}, { _id: 0 }).populate('owner participants', 'name -_id')
+        return Event.find({ participants: { $nin: [userId] }, owner: { $nin: [userId] }, endTime: { [status === eventStatus.ACTIVE ? '$gt' : '$lte']: utcNow }}).populate('owner participants', 'name -_id')
     },
 
     findCreatedEvents(userId, status = eventStatus.ACTIVE){
