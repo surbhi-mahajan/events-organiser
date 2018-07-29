@@ -38,7 +38,6 @@ export default class Login extends Vue {
   public password: string = '';
 
   public onLogin() {
-    // TODO: Implement actual Login
     this.$store.dispatch('login', { email: this.email, password: this.password })
       .then(() => {
         this.$router.push({ name: 'dashboard' });

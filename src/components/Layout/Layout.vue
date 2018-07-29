@@ -31,7 +31,7 @@ import Navbar from './Navbar.vue';
   name: 'Layout',
 })
 export default class Layout extends Vue {
-  public isDrawerOpen = true;
+  public isDrawerOpen = window.screen.width > 768 ? true : false;
 }
 </script>
 
