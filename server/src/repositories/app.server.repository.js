@@ -9,8 +9,12 @@ const { eventStatus } = require('../constants')
 
 module.exports = {
 
-    findUser(email, password) {
-        return User.findOne({ email, password })
+    findUser(email) {
+        return User.findOne({ email })
+    },
+
+    addUser(user) {
+        return new User(user).save();
     },
 
     findUserById(userId) {

@@ -16,6 +16,7 @@
                 </v-form>
               </v-card-text>
               <v-card-actions>
+                <v-btn flat small color="primary" style="font-weight: bold; text-transform: capitalize; margin-left: 20px;" @click="$router.push({ name: 'signup' })">Create account</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click="onLogin">Login</v-btn>
               </v-card-actions>
@@ -40,6 +41,7 @@ export default class Login extends Vue {
   public onLogin() {
     this.$store.dispatch('login', { email: this.email, password: this.password })
       .then(() => {
+        this.$notifier.hide();
         this.$router.push({ name: 'dashboard' });
       })
       .catch(() => void 0);

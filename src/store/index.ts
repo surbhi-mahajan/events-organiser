@@ -5,7 +5,6 @@ import '../axios/interceptors';
 
 import { EventTypes, EventStatus } from '../shared/enum/EventsEnum';
 import { IEvent } from '../shared/interface/IEvent';
-import { $notifier } from '@/shared/components/Notifier/plugin';
 
 Vue.use(Vuex);
 
@@ -102,7 +101,13 @@ export default new Vuex.Store({
       return axios.post('/api/login', payload)
         .then((res) => {
           localStorage.setItem('userID', res.data.success.id);
-          $notifier.hide();
+        });
+    },
+
+    signup(context, user) {
+      return axios.post('/api/signup', user)
+        .then((res) => {
+          localStorage.setItem('userID', res.data.success.id);
         });
     },
 

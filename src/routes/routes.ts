@@ -71,6 +71,11 @@ export const routes = [
     component: () => import('../components/Login/Login.vue'),
   },
   {
+    path: '/signup',
+    name: 'signup',
+    component: () => import('../components/Signup/Signup.vue'),
+  },
+  {
     path: '*',
     redirect: '/',
   },
