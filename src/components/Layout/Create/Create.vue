@@ -2,12 +2,11 @@
     <v-container fluid>
         <v-form ref="form" lazy-validation>
 
-            <v-select
+            <v-text-field
                 v-model="event.name"
-                :items="categories"
                 label="Event"
                 required
-            ></v-select>
+            ></v-text-field>
 
             <v-text-field
                 v-model="event.venue"
@@ -70,17 +69,12 @@
 
             <v-layout row wrap>
                 <v-flex xs12 sm5>
-                    <v-menu
+                    <v-dialog
                         ref="startMenu"
-                        :close-on-content-click="false"
                         v-model="startMenu"
-                        :nudge-right="40"
                         lazy
-                        transition="scale-transition"
-                        offset-y
                         full-width
-                        max-width="290px"
-                        min-width="290px"
+                        width="290px"
                     >
                         <v-text-field
                             slot="activator"
@@ -94,23 +88,18 @@
                             v-model="event.startTime"
                             @change="$refs.startMenu.save(event.startTime)"
                         ></v-time-picker>
-                    </v-menu>
+                    </v-dialog>
                 </v-flex>
 
                 <v-spacer></v-spacer>
 
                 <v-flex xs12 sm5>
-                    <v-menu
+                    <v-dialog
                         ref="endMenu"
-                        :close-on-content-click="false"
                         v-model="endMenu"
-                        :nudge-right="40"
                         lazy
-                        transition="scale-transition"
-                        offset-y
                         full-width
-                        max-width="290px"
-                        min-width="290px"
+                        width="290px"
                     >
                         <v-text-field
                             slot="activator"
@@ -124,7 +113,7 @@
                             v-model="event.endTime"
                             @change="$refs.endMenu.save(event.endTime)"
                         ></v-time-picker>
-                    </v-menu>
+                    </v-dialog>
                 </v-flex>
             </v-layout>
 
@@ -158,7 +147,6 @@ export default class Create extends Vue {
     endDate: this.formatDate(moment()),
   } as ICreateEvent;
 
-  public categories = this.$store.getters.categories;
   public startMenu: boolean = false;
   public endMenu: boolean = false;
   public showStartDateMenu: boolean = false;

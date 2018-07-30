@@ -1,8 +1,9 @@
 import axios from 'axios';
 import { $notifier } from '../shared/components/Notifier/plugin';
+import $store from '../store';
 
 axios.interceptors.request.use((config) => {
-    config.headers.Authorization = localStorage.getItem('userID');
+    config.headers.Authorization = $store.getters.userDetails.id;
     return config;
   }, (error) => {
         $notifier.show({ text: 'Oops! Something went wrong. Please try again.', type: 'error' });

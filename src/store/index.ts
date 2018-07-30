@@ -5,11 +5,12 @@ import '../axios/interceptors';
 
 import { EventTypes, EventStatus } from '../shared/enum/EventsEnum';
 import { IEvent } from '../shared/interface/IEvent';
+import { IUser } from '../shared/interface/IUser';
 
 Vue.use(Vuex);
 
 interface IState {
-  categories: string[];
+  user: IUser;
   pendingActiveEvents: IEvent[];
   createdActiveEvents: IEvent[];
   createdExpiredEvents: IEvent[];
@@ -19,12 +20,10 @@ interface IState {
 
 export default new Vuex.Store({
   state: {
-    categories: [
-        'Football',
-        'Cricket',
-        'Badminton',
-        'Chess',
-    ],
+    user: {
+      name: localStorage.getItem('userName') || '',
+      id: localStorage.getItem('userID') || '',
+    },
     pendingActiveEvents: [],
     createdActiveEvents: [],
     createdExpiredEvents: [],
@@ -32,8 +31,8 @@ export default new Vuex.Store({
     acceptedExpiredEvents: [],
   },
   getters: {
-    categories(state: IState): string[] {
-      return state.categories;
+    userDetails(state: IState): IUser {
+      return state.user;
     },
     pendingActiveEvents(state: IState): IEvent[] {
       return state.pendingActiveEvents;
@@ -52,6 +51,20 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    storeUserDetails(state: IState, user: IUser) {
+      state.user = user;
+      localStorage.setItem('userID', user.id);
+      localStorage.setItem('userName', user.name);
+    },
+
+    removeUserDetails(state: IState, user: IUser) {
+      state.user.id = '';
+      state.user.name = '';
+
+      localStorage.removeItem('userID');
+      localStorage.removeItem('userName');
+    },
+
     storependingActiveEvents(state: IState, events: IEvent[]) {
       state.pendingActiveEvents.splice(0, state.pendingActiveEvents.length, ...events);
     },
@@ -97,18 +110,22 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login(context, payload) {
+    login({ commit }, payload) {
       return axios.post('/api/login', payload)
         .then((res) => {
-          localStorage.setItem('userID', res.data.success.id);
+          commit('storeUserDetails', res.data.success);
         });
     },
 
-    signup(context, user) {
+    signup({ commit }, user) {
       return axios.post('/api/signup', user)
         .then((res) => {
-          localStorage.setItem('userID', res.data.success.id);
+          commit('storeUserDetails', res.data.success);
         });
+    },
+
+    logout({ commit }) {
+      return commit('removeUserDetails');
     },
 
     getEvents({ commit }, { type , status }: { type: EventTypes, status: EventStatus }) {

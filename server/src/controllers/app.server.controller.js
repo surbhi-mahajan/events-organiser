@@ -13,7 +13,7 @@ module.exports = (respository) => {
 
         if (user && user.password === password) {
           // Can access '_id' by 'id'
-          response.success = { id: user.id }
+          response.success = { id: user.id, name: user.name }
         } else {
           response.error = 'Incorrect Email ID or Password.'
         }
@@ -48,7 +48,7 @@ module.exports = (respository) => {
             return respository.addUser({ name, email, password })
               .then((user) => {
                 res.send({
-                  success: { id: user.id }
+                  success: { id: user.id, name: user.name }
                 });
               })
           }

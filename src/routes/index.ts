@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import { routes } from './routes';
+import $store from '../store';
 
 Vue.use(Router);
 
@@ -14,12 +15,12 @@ const routerInstance = new Router({
 
 routerInstance.beforeEach((to, from, next) => {
   let redirectTo;
-  const email = localStorage.getItem('userID');
+  const userId = $store.getters.userDetails.id;
 
   if (to.name && whiteListedRoutes.includes(to.name)) {
-    redirectTo = email ? '/' : redirectTo;
+    redirectTo = userId ? '/' : redirectTo;
   } else {
-    redirectTo = !email ? '/login' : redirectTo;
+    redirectTo = !userId ? '/login' : redirectTo;
   }
   next(redirectTo);
 });

@@ -48,8 +48,8 @@ export default class Navbar extends Vue {
     return 'theme--light';
   }
 
-  public onToggle(): void {
-    this.$emit('input', this.value);
+  public onToggle(isOpen: boolean): void {
+    this.$emit('input', isOpen);
   }
 
   public isActiveRoute(route: RegExp): boolean {

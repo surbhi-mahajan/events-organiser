@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="725px" height="897px" viewBox="0 0 725 897" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>minents-logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="-19.7986617%" y1="-14.9923711%" x2="-19.7986618%" y2="112.60112%" id="linearGradient-1">
+            <stop stop-color="#00C6FB" offset="0%"></stop>
+            <stop stop-color="#005BEA" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="16.7076362%" x2="50%" y2="107.819471%" id="linearGradient-2">
+            <stop stop-color="#00C6FB" offset="0%"></stop>
+            <stop stop-color="#005BEA" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="minents-logo" transform="translate(-6.000000, 19.000000)">
+            <ellipse id="Oval-2" fill="url(#linearGradient-1)" cx="460" cy="214.333333" rx="65" ry="65.3333333"></ellipse>
+            <ellipse id="Oval-2-Copy" fill="url(#linearGradient-1)" cx="275" cy="214.333333" rx="65" ry="65.3333333"></ellipse>
+            <path d="M215,480.684316 C162.418684,480.01165 120,436.959295 120,383.948718 C120,330.938141 162.418684,287.885786 215,287.21312 L360,287.205128 L365,287.205128 L365,342.487179 L335,342.487179 L335,453.051282 C335,441.324786 335,449.700855 335,478.179487 C335,520.897436 317.5,616.384615 297.5,633.974359 C292.5,636.487179 240,639 227.5,633.974359 C217.5,631.461538 215,621.410256 215,603.820513 C215,592.094017 215,551.051282 215,480.692308 Z M207.5,345 C190.833333,351.700855 182.5,364.264957 182.5,382.692308 C182.5,401.119658 190.833333,413.683761 207.5,420.384615 L207.5,345 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+            <path d="M460,480.684316 C407.418684,480.01165 365,436.959295 365,383.948718 C365,330.938141 407.418684,287.885786 460,287.21312 L605,287.205128 L610,287.205128 L610,342.487179 L580,342.487179 L580,453.051282 C580,441.324786 580,449.700855 580,478.179487 C580,520.897436 562.5,616.384615 542.5,633.974359 C537.5,636.487179 485,639 472.5,633.974359 C462.5,631.461538 460,621.410256 460,603.820513 C460,592.094017 460,551.051282 460,480.692308 Z M452.5,345 C435.833333,351.700855 427.5,364.264957 427.5,382.692308 C427.5,401.119658 435.833333,413.683761 452.5,420.384615 L452.5,345 Z" id="Combined-Shape-Copy" fill="url(#linearGradient-1)" transform="translate(487.500000, 462.040521) scale(1, -1) rotate(180.000000) translate(-487.500000, -462.040521) "></path>
+            <path d="M700,71.5 C705.522847,71.5 710,75.9771525 710,81.5 L710,674 C710,679.522847 705.522847,684 700,684 L35,684 C29.4771525,684 25,679.522847 25,674 L25,81.5 C25,75.9771525 29.4771525,71.5 35,71.5" id="Rectangle" stroke="url(#linearGradient-2)" stroke-width="37.5"></path>
+            <path d="M700,71.5 L565,71.5" id="Path-3" stroke="url(#linearGradient-2)" stroke-width="37.5"></path>
+            <path d="M170,71.5 L35,71.5" id="Path-3-Copy" stroke="url(#linearGradient-2)" stroke-width="37.5"></path>
+            <path d="M502.5,71.5 L232.5,71.5" id="Path-3-Copy-2" stroke="url(#linearGradient-2)" stroke-width="37.5"></path>
+            <path d="M533.75,0.25 L533.75,135.25" id="Line" stroke="url(#linearGradient-2)" stroke-width="37.5" stroke-linecap="square"></path>
+            <path d="M201.25,0.25 L201.25,135.25" id="Line-Copy" stroke="url(#linearGradient-2)" stroke-width="37.5" stroke-linecap="square"></path>
+            <text id="Minents" font-family="Baloo-Regular, Baloo" font-size="200" font-weight="normal" fill="#403E3E">
+                <tspan x="0" y="874">Minents</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
