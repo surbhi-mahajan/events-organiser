@@ -1,5 +1,5 @@
 <template>
-  <div style="border: 1px solid black; padding: 10px; margin: 10px;">
+  <div style="padding: 30px; font-size: 18px">
     <p>
       <strong>Event: </strong>
       {{ event.name }}
@@ -20,18 +20,21 @@
       <strong>End Time: </strong>
       {{ event.endTime | formatDate }}
     </p>
+    </br>
+    </br>
+    </br>
     <v-layout row wrap class="text-xs-center">
       <v-flex sm6>
-        <v-tooltip right>
-          <v-btn flat icon slot="activator" color="success" @click="onAccept">
+        <v-tooltip bottom>
+          <v-btn slot="activator" color="success" @click="onAccept">
             <v-icon>thumb_up</v-icon>
           </v-btn>
           <span>Accept</span>
         </v-tooltip>
       </v-flex>
       <v-flex sm6>
-        <v-tooltip right>
-          <v-btn flat icon slot="activator" color="error" @click="onReject">
+        <v-tooltip bottom>
+          <v-btn slot="activator" color="error" @click="onReject">
             <v-icon>thumb_down</v-icon>
           </v-btn>
           <span>Reject</span>
