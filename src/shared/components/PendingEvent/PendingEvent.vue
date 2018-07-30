@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 30px; font-size: 18px">
+  <div style="padding: 20px; font-size: 18px">
     <p>
       <strong>Event: </strong>
       {{ event.name }}
