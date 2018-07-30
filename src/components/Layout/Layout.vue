@@ -1,7 +1,11 @@
 <template>
   <div>
     <Header @toggleDrawer="isDrawerOpen = !isDrawerOpen"/>
-    <Navbar v-model="isDrawerOpen" />
+    <!-- Please don't remove below <div>. If we drag mouse from left of screen to right, nav bar opens.
+      This functionality stops somehow by enclosing in a div and we want that. -->
+    <div>
+      <Navbar v-model="isDrawerOpen"/>
+    </div>
     <v-content>
       <v-container fluid fill-height pa-0>
         <v-layout
