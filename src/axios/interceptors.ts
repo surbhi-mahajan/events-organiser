@@ -6,7 +6,7 @@ axios.interceptors.request.use((config) => {
     config.headers.Authorization = $store.getters.userDetails.id;
     return config;
   }, (error) => {
-        $notifier.show({ text: 'Oops! Something went wrong. Please try again.', type: 'error' });
+        $notifier.show({ text: 'Something went wrong. Please try again.', type: 'error' });
         return Promise.reject(error);
   });
 
@@ -18,7 +18,7 @@ axios.interceptors.response.use((response) => {
     return response;
   }, (config) => {
         $notifier.show({
-            text: config.response.data.error || 'Oops! Something went wrong. Please try again.',
+            text: config.response.data.error || 'Something went wrong. Please try again.',
             type: 'error',
         });
         return Promise.reject(config.response.data.error);

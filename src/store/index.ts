@@ -95,16 +95,6 @@ export default new Vuex.Store({
       }
     },
 
-    // Only doing at frontend for now, may store in local storage
-    rejectEvent(state: IState, eventId: number) {
-      for (const [index, event] of state.pendingActiveEvents.entries()) {
-        if (event._id === eventId) {
-          state.pendingActiveEvents.splice(index, 1);
-          return;
-        }
-      }
-    },
-
     addEvent(state: IState, event: IEvent) {
         state.createdActiveEvents.push(event);
     },
@@ -158,10 +148,6 @@ export default new Vuex.Store({
         .then(() => {
           return commit('acceptEvent', eventId);
         });
-    },
-
-    rejectEvent({ commit }, eventId: number) {
-      return commit('rejectEvent', eventId);
     },
 
     addEvent({ commit }, event: IEvent) {

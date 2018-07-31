@@ -1,44 +1,33 @@
 <template>
   <div style="padding: 20px; font-size: 18px">
     <p>
-      <strong>Event: </strong>
+      <strong>Minent: </strong>
       {{ event.name }}
     </p>
     <p>
-      <strong>Owner: </strong>
+      <strong>Hosted By: </strong>
       {{ event.owner[0].name }}
     </p>
     <p>
-      <strong>Venue: </strong>
+      <strong>At: </strong>
       {{ event.venue }}
     </p>
     <p>
-      <strong>Start Time: </strong>
+      <strong>We Start: </strong>
       {{ event.startTime | formatDate }}
     </p>
     <p>
-      <strong>End Time: </strong>
-      {{ event.endTime | formatDate }}
+      <strong>There For: </strong>
+      {{ eventDuration }}
     </p>
     </br>
     </br>
     </br>
     <v-layout row wrap class="text-xs-center">
-      <v-flex sm6>
-        <v-tooltip bottom>
-          <v-btn slot="activator" color="success" @click="onAccept">
-            <v-icon>thumb_up</v-icon>
-          </v-btn>
-          <span>Accept</span>
-        </v-tooltip>
-      </v-flex>
-      <v-flex sm6>
-        <v-tooltip bottom>
-          <v-btn slot="activator" color="error" @click="onReject">
-            <v-icon>thumb_down</v-icon>
-          </v-btn>
-          <span>Reject</span>
-        </v-tooltip>
+      <v-flex>
+        <v-btn slot="activator" color="success" @click="onAccept" style="text-transform: none">
+          I'm in!
+        </v-btn>
       </v-flex>
     </v-layout>
   </div>
@@ -46,6 +35,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
+import moment from 'moment';
 
 import { IEvent } from '../../interface/IEvent';
 
@@ -56,18 +46,26 @@ export default class PendingEvent extends Vue {
   @Prop({ required: true, type: Object })
   public event: IEvent;
 
+  get eventDuration(): string {
+    const duration = moment.duration(this.event.endTime - this.event.startTime, 'seconds');
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+    let formattedDuration = '';
+
+    if (hours) {
+      formattedDuration += `${ hours }hr `;
+    }
+    if (minutes) {
+      formattedDuration += `${ minutes }min`;
+    }
+
+    return formattedDuration;
+  }
+
   public onAccept() {
     this.$store.dispatch('acceptEvent', this.event._id)
       .then(() => {
         this.$notifier.show({ text: 'Event has been accepted successfully.', type: 'success' });
-      })
-      .catch(() => void 0);
-  }
-
-  public onReject() {
-    this.$store.dispatch('rejectEvent', this.event._id)
-      .then(() => {
-        this.$notifier.show({ text: 'Event has been rejected successfully.', type: 'success' });
       })
       .catch(() => void 0);
   }

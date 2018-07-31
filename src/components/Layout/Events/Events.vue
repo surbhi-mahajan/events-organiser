@@ -2,13 +2,13 @@
   <v-container class="pa-0">
     <v-layout row wrap>
       <v-flex mb-5 elevation-2>
-        <v-tabs v-model="tabs.active" color="grey lighten-4" slider-color="blue">
+        <v-tabs centered v-model="tabs.active" color="grey lighten-4" slider-color="blue">
           <v-tab v-for="tab in tabs.list" :key="tab.name" ripple @click="$router.push({ name: tab.route })">
               {{ tab.name }}
           </v-tab>
           <v-tab-item lazy v-for="tab in tabs.list" :key="tab.name">
             <v-card flat>
-              <v-tabs v-model="tab.tabs.active" color="grey lighten-4" slider-color="blue">
+              <v-tabs centered v-model="tab.tabs.active" color="grey lighten-4" slider-color="blue">
                 <v-tab v-for="innerTab in tab.tabs.list" :key="innerTab.name" @click="$router.push({ name: innerTab.route })">
                   {{ innerTab.name }}
                 </v-tab>

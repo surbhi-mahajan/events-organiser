@@ -22,7 +22,7 @@ module.exports = (respository) => {
       })
       .catch((err) => {
         res.send({
-          error: 'Oops! Something went wrong. Please try again.'
+          error: 'Something went wrong. Please try again.'
         })
       })
   })
@@ -55,7 +55,7 @@ module.exports = (respository) => {
         })
         .catch((err) => {
           res.send({
-            error: 'Oops! Something went wrong. Please try again.'
+            error: 'Something went wrong. Please try again.'
           })
         })
     }
@@ -97,7 +97,7 @@ module.exports = (respository) => {
       })
         .catch((err) => {
           res.send({
-            error: 'Oops! Something went wrong. Please try again.'
+            error: 'Something went wrong. Please try again.'
           })
         })
     }
@@ -138,7 +138,7 @@ module.exports = (respository) => {
         })
         .catch((err) => {
           res.send({
-            error: 'Oops! Something went wrong. Please try again.'
+            error: 'Something went wrong. Please try again.'
           })
         })
     }
@@ -161,7 +161,7 @@ module.exports = (respository) => {
       })
       .catch((err) => {
         res.send({
-          error: 'Oops! Something went wrong. Please try again.'
+          error: 'Something went wrong. Please try again.'
         })
       })
   });
@@ -191,7 +191,7 @@ module.exports = (respository) => {
       })
       .catch((err) => {
         res.send({
-          error: 'Oops! Something went wrong. Please try again.'
+          error: 'Something went wrong. Please try again.'
         })
       })
   });

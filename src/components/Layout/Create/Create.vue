@@ -94,26 +94,31 @@
                 <v-spacer></v-spacer>
 
                 <v-flex xs12 sm5>
-                    <v-dialog
-                        ref="endMenu"
-                        v-model="endMenu"
-                        lazy
-                        full-width
-                        width="290px"
-                    >
-                        <v-text-field
-                            slot="activator"
-                            v-model="event.endTime"
-                            label="End Time"
-                            prepend-icon="access_time"
-                            readonly
-                        ></v-text-field>
-                        <v-time-picker
-                            v-if="endMenu"
-                            v-model="event.endTime"
-                            @change="$refs.endMenu.save(event.endTime)"
-                        ></v-time-picker>
-                    </v-dialog>
+                    <v-layout row wrap>
+                      <v-flex xs5 sm5 md3 style="padding: 25px 0px;">
+                        <v-layout col wrap style="color: rgba(0,0,0,0.54); font-size: 18px;">
+                          <v-flex>
+                            <span class="pl-0">
+                              <v-icon>timer</v-icon>
+                              Duration
+                            </span>
+                          </v-flex>
+                          <v-flex style="text-align: center">
+                            (min)
+                          </v-flex>
+                        </v-layout>
+                      </v-flex>
+                      <v-flex offset-xs1 xs6 sm6 md8 style="margin-top: 16px;">
+                        <v-slider
+                          v-model="event.duration"
+                          step="10"
+                          :max="240"
+                          :min="10"
+                          always-dirty
+                          thumb-label="always"
+                        ></v-slider>
+                      </v-flex>
+                    </v-layout>
                 </v-flex>
             </v-layout>
 
@@ -133,6 +138,7 @@ import { IEvent } from '../../../shared/interface/IEvent';
 import moment from 'moment-timezone';
 
 interface ICreateEvent extends IEvent {
+  duration: number;
   startDate: string;
   endDate: string;
 }
@@ -148,7 +154,6 @@ export default class Create extends Vue {
   } as ICreateEvent;
 
   public startMenu: boolean = false;
-  public endMenu: boolean = false;
   public showStartDateMenu: boolean = false;
   public showEndDateMenu: boolean = false;
   public unformattedStartDate: string = '';
@@ -189,9 +194,9 @@ export default class Create extends Vue {
     const startTime =
       this.event.startTime &&
       moment(this.event.startDate + this.event.startTime, 'DD MMM YYYY HH:mm').unix();
-    const endTime =
-      this.event.endTime &&
-      moment(this.event.endDate + this.event.endTime, 'DD MMM YYYY HH:mm').unix();
+
+    // Convert duration in seconds
+    const endTime = startTime + this.event.duration * 60;
 
     const payload = {
       name: this.event.name,

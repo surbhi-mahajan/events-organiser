@@ -24,7 +24,9 @@ import {
   VDatePicker,
   VSnackbar,
   VDialog,
-  VCarousel
+  VCarousel,
+  VSlider,
+  VSubheader
 } from 'vuetify'
 import 'vuetify/src/stylus/app.styl'
 
@@ -53,6 +55,8 @@ Vue.use(Vuetify, {
     VDatePicker,
     VSnackbar,
     VDialog,
-    VCarousel
+    VCarousel,
+    VSlider,
+    VSubheader
   },
 })

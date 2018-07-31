@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer :value="value" @input="onToggle" fixed>
+  <v-navigation-drawer :value="value" @input="onToggle" fixed app>
     <v-list dense>
       <v-list-tile :class="isActiveRoute(/^dashboard$/) ? activeClass : ''" @click="$router.push({ name: 'dashboard' })">
         <v-list-tile-action>

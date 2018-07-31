@@ -51,7 +51,7 @@ function registerEndpoint(endpoint) {
   // // Handle uncaught exceptions so that we don't have to put this in catch() of each API
   // expressApp.use((err, req, res) => {
   //     res.send({
-  //         error: 'Oops! Something went wrong. Please try again.!'
+  //         error: 'Something went wrong. Please try again.!'
   //     })
   // })
 }
