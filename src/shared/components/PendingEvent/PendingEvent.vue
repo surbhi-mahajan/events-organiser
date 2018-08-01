@@ -18,7 +18,7 @@
     </p>
     <p>
       <strong>There For: </strong>
-      {{ eventDuration }}
+      {{ event.endTime - event.startTime | formatTime }}
     </p>
     </br>
     </br>
@@ -45,22 +45,6 @@ import { IEvent } from '../../interface/IEvent';
 export default class PendingEvent extends Vue {
   @Prop({ required: true, type: Object })
   public event: IEvent;
-
-  get eventDuration(): string {
-    const duration = moment.duration(this.event.endTime - this.event.startTime, 'seconds');
-    const hours = duration.hours();
-    const minutes = duration.minutes();
-    let formattedDuration = '';
-
-    if (hours) {
-      formattedDuration += `${ hours }hr `;
-    }
-    if (minutes) {
-      formattedDuration += `${ minutes }min`;
-    }
-
-    return formattedDuration;
-  }
 
   public onAccept() {
     this.$store.dispatch('acceptEvent', this.event._id)

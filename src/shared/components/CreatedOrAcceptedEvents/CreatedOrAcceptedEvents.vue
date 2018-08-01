@@ -20,7 +20,7 @@
               <strong>Start Time: </strong>{{ event.startTime | formatDate }}
             </v-flex>
             <v-flex xs12 sm6>
-              <strong>End Time: </strong>{{ event.endTime | formatDate }}
+              <strong>Duration: </strong>{{ (event.endTime - event.startTime) | formatTime }}
             </v-flex>
           </v-layout>
         </div>
