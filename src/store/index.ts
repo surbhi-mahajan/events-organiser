@@ -115,6 +115,13 @@ export default new Vuex.Store({
     },
 
     logout({ commit }) {
+      const auth2 = window.gapi.auth2.getAuthInstance();
+
+      if (auth2) {
+        return auth2.signOut().then(() => commit('removeUserDetails'));
+      }
+
+      // May have to send call to backend when actual Login API is created.
       return commit('removeUserDetails');
     },
 

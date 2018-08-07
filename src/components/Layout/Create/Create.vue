@@ -209,7 +209,7 @@ export default class Create extends Vue {
       .then(() => {
         this.$router.push({ name: 'events.created.active' });
         this.$notifier.show({
-            text: 'Event has been added successfully.',
+            text: 'Event added successfully.',
             type: 'success',
         });
       })

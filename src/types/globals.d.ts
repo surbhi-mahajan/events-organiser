@@ -1,6 +1,6 @@
 declare global {
   export interface Window {
-    email: string;
+    gapi: any;
   }
 }
 

@@ -10,6 +10,9 @@ var userSchema = new mongoose.Schema({
     },
     "password": {
         "type": String
+    },
+    "provider": {
+        "type": String
     }
 });
 mongoose.model("User",userSchema);

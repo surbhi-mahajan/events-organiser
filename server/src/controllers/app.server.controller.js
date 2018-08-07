@@ -1,30 +1,74 @@
 'use strict';
 
 const router = require('express').Router();
-const { eventType, eventStatus } = require('../constants')
+const { OAuth2Client } = require('google-auth-library');
+const { eventType, eventStatus, googleKey } = require('../constants')
+const client = new OAuth2Client(googleKey.web.client_id, googleKey.web.client_secret);
+
+const ERROR_MSG = 'Something went wrong. Please try again.';
 
 module.exports = (respository) => {
 
   router.post('/login', (req, res) => {
-    const { email, password } = req.body
-    respository.findUser(email)
-      .then(user => {
-        const response = {}
+    const { email, password, provider, token } = req.body
 
-        if (user && user.password === password) {
-          // Can access '_id' by 'id'
-          response.success = { id: user.id, name: user.name }
-        } else {
-          response.error = 'Incorrect Email ID or Password.'
-        }
-
-        res.send(response)
+    if (provider === 'google') {
+      // Verify token
+      client.verifyIdToken({
+        idToken: token,
+        audience: googleKey.web.client_id
       })
-      .catch((err) => {
-        res.send({
-          error: 'Something went wrong. Please try again.'
+        .then(user => {
+          // If token valid, then find if user already exists in db, if yes then return used ID otherwise add new user.
+          const { name, email } = user.getAttributes().payload;
+          return respository.findUser(email)
+            .then(user => {
+              if (user) {
+                res.send({
+                  success: { id: user.id, name }
+                });
+              } else {
+                return respository.addUser({ name, email, password: 'NA', provider })
+                  .then((user) => {
+                    res.send({
+                      success: { id: user.id, name: user.name }
+                    });
+                  })
+              }
+            })
+            .catch(error => {
+              res.send({
+                error: error && error.message || ERROR_MSG
+              })
+            })
         })
-      })
+        .catch(error => {
+          res.send({
+            error: error && error.message || ERROR_MSG
+          })
+        })
+    } else {
+      respository.findUser(email)
+        .then(user => {
+          const response = {}
+
+          // For google users we store password as NA. So, for disabling users to login via 'NA' as password
+          // we have to check that User should not have any provider.
+          if (user && !user.provider && user.password === password) {
+            // Can access '_id' by 'id'
+            response.success = { id: user.id, name: user.name }
+          } else {
+            response.error = 'Incorrect Email ID or Password.'
+          }
+
+          res.send(response)
+        })
+        .catch(() => {
+          res.send({
+            error: ERROR_MSG
+          })
+        })
+    }
   })
 
   router.post('/signup', (req, res) => {
@@ -55,7 +99,7 @@ module.exports = (respository) => {
         })
         .catch((err) => {
           res.send({
-            error: 'Something went wrong. Please try again.'
+            error: ERROR_MSG
           })
         })
     }
@@ -97,7 +141,7 @@ module.exports = (respository) => {
       })
         .catch((err) => {
           res.send({
-            error: 'Something went wrong. Please try again.'
+            error: ERROR_MSG
           })
         })
     }
@@ -138,7 +182,7 @@ module.exports = (respository) => {
         })
         .catch((err) => {
           res.send({
-            error: 'Something went wrong. Please try again.'
+            error: ERROR_MSG
           })
         })
     }
@@ -161,7 +205,7 @@ module.exports = (respository) => {
       })
       .catch((err) => {
         res.send({
-          error: 'Something went wrong. Please try again.'
+          error: ERROR_MSG
         })
       })
   });
@@ -191,7 +235,7 @@ module.exports = (respository) => {
       })
       .catch((err) => {
         res.send({
-          error: 'Something went wrong. Please try again.'
+          error: ERROR_MSG
         })
       })
   });
