@@ -9,6 +9,12 @@
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
+              <v-card-text>
+                <h2 style="display: flex; justify-content: center;">
+                  <img src="logo.jpg" width="30px" height="40px"/>                  
+                  <span style="padding: 5px 0px 5px 12px;">Minents</span>
+                </h2>
+              </v-card-text>
               <!-- <v-card-text>
                 <v-form>
                   <v-text-field prepend-icon="person" name="email" label="Email" type="email" v-model="email"></v-text-field>
@@ -24,7 +30,7 @@
                 :params="googleSignInParams"
                 @success="onGoogleSignInSuccess"
                 @error="onGoogleSignInError">
-                <div style="padding: 50px 0px;">
+                <div style="padding: 20px 0px 50px 0px;">
                   <div style="height: 36px; width: 170px; margin: auto;" class="abcRioButton abcRioButtonLightBlue">
                     <div class="abcRioButtonContentWrapper">
                       <div class="abcRioButtonIcon" style="padding: 8px">
