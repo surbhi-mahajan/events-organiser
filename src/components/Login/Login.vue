@@ -9,7 +9,7 @@
               <v-toolbar dark color="primary">
                 <v-toolbar-title>Login</v-toolbar-title>
               </v-toolbar>
-              <v-card-text>
+              <!-- <v-card-text>
                 <v-form>
                   <v-text-field prepend-icon="person" name="email" label="Email" type="email" v-model="email"></v-text-field>
                   <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="password"></v-text-field>
@@ -19,15 +19,15 @@
                 <v-btn flat small color="primary" style="font-weight: bold; text-transform: capitalize; margin-left: 20px;" @click="$router.push({ name: 'signup' })">Create account</v-btn>
                 <v-spacer></v-spacer>
                 <v-btn color="primary" @click="onLogin">Login</v-btn>
-              </v-card-actions>
+              </v-card-actions> -->
               <g-signin-button
                 :params="googleSignInParams"
                 @success="onGoogleSignInSuccess"
                 @error="onGoogleSignInError">
-                <div style="padding-bottom: 15px;">
-                  <div style="height: 36px; width: 120px; margin: auto;" class="abcRioButton abcRioButtonLightBlue">
+                <div style="padding: 50px 0px;">
+                  <div style="height: 36px; width: 170px; margin: auto;" class="abcRioButton abcRioButtonLightBlue">
                     <div class="abcRioButtonContentWrapper">
-                      <div class="abcRioButtonIcon" style="padding:8px">
+                      <div class="abcRioButtonIcon" style="padding: 8px">
                         <div style="width: 18px; height: 18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
                           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg">
                             <g>
@@ -42,8 +42,7 @@
                         </div>
                       </div>
                       <span style="font-size:13px;line-height:34px;" class="abcRioButtonContents">
-                        <span id="not_signed_ine2whubfo8zz0">Sign in</span>
-                        <span id="connectede2whubfo8zz0" style="display:none">Signed in</span>
+                        <span id="not_signed_ine2whubfo8zz0">Login with Google</span>
                       </span>
                     </div>
                   </div>
@@ -64,14 +63,14 @@ import 'vuetify';
   name: 'Login',
 })
 export default class Login extends Vue {
-  public email: string = '';
-  public password: string = '';
+  // public email: string = '';
+  // public password: string = '';
   public googleSignInParams = {
     client_id: '361002868378-nd625d911rmefiv3r1fo2kvdnt02l82b.apps.googleusercontent.com',
   };
-  public onLogin() {
-    this._login({ email: this.email, password: this.password });
-  }
+  // public onLogin() {
+  //   this._login({ email: this.email, password: this.password });
+  // }
 
   public onGoogleSignInSuccess(googleUser: any) {
     const token = googleUser.getAuthResponse().id_token;
@@ -95,7 +94,7 @@ export default class Login extends Vue {
 
 <style scoped>
 .abcRioButtonLightBlue {
-  background-color: #fff;
+  background-color: ghostwhite;
   color: #757575;
 }
 .abcRioButton {
@@ -108,8 +107,6 @@ export default class Login extends Vue {
   transition: background-color .218s,border-color .218s,box-shadow .218s;
   -webkit-user-select: none;
   -webkit-appearance: none;
-  background-color: #fff;
-  background-image: none;
   /* color: #262626; */
   cursor: pointer;
   outline: none;
@@ -130,6 +127,7 @@ export default class Login extends Vue {
 }
 .abcRioButtonIcon {
     float: left;
+    border-right: #ececec 1px solid;
 }
 .abcRioButtonSvg {
     display: block;
