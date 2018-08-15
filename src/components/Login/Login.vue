@@ -11,11 +11,11 @@
               </v-toolbar>
               <v-card-text>
                 <div style="display: flex; justify-content: center;">
-                  <img src="logo_without_name.jpg" width="35px" height="40px"/>                  
-                  <span style="padding-left: 10px; font-size: 30px;">Minents</span>
+                  <img src="logo.jpg" width="35px" height="40px"/>                  
+                  <span style="padding-left: 10px; font-size: 30px;">LetsPlay</span>
                 </div>
               </v-card-text>
-              <!-- <v-card-text>
+            <!-- <v-card-text>
                 <v-form>
                   <v-text-field prepend-icon="person" name="email" label="Email" type="email" v-model="email"></v-text-field>
                   <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="password"></v-text-field>

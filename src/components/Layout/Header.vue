@@ -3,14 +3,14 @@
     <v-toolbar-side-icon @click.stop="onDrawerClick" class="hidden-xs-only"></v-toolbar-side-icon>
     <v-toolbar-title>
       <a @click="$router.push({ name: 'dashboard' })" style="color: white">
-        Minents
+        LetsPlay
       </a>
       <!-- <v-avatar
         tile
         :size="4"
         color="grey lighten-4"
       >
-        <img src="../../assets/logo.svg" width="40px" alt="Minents">
+        <img src="../../assets/logo.svg" width="40px" alt="LetsPlay">
       </v-avatar> -->
     </v-toolbar-title>
 
